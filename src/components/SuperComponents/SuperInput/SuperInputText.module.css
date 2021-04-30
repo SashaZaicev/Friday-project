@@ -1,0 +1,40 @@
+.superInput {
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    width: 210px;
+    line-height: 25px;
+    border-radius: 30px;
+    margin: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #524f4e;
+    background: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+}
+
+.errorInput {
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    width: 210px;
+    line-height: 25px;
+    border-radius: 30px;
+    margin: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #524f4e;
+    background: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+    border: 2px solid red;
+
+}
+
+.error {
+    padding: 3px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: red;
+}
