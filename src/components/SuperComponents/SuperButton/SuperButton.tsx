@@ -6,10 +6,12 @@ type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
 
 type SuperButtonPropsType = DefaultButtonPropsType & {
     red?: boolean
+    callFunction:()=>void //добавил для типизации функции
 }
 
 const SuperButton: React.FC<SuperButtonPropsType> = (
     {
+        callFunction,//добавил для вызова функции
         red, className,
         ...restProps// все остальные пропсы попадут в объект restProps, там же будет children
     }
@@ -19,9 +21,10 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
     return (
         <button
             className={finalClassName}
-            onClick={() => alert("Hello!")}
+            onClick={() => callFunction()} //изменил для приходящей функции
             {...restProps} // отдаём кнопке остальные пропсы если они есть (children там внутри)
-        >click</button>
+            // Появится возможность кнопке давать любое имя
+        >{restProps.title}</button>
     );
 }
 

@@ -7,7 +7,7 @@ export const Test = () => {
     return (
         <div>
             <SuperInputText/>
-            <SuperButton/>
+            {/*<SuperButton/>*/}
             <SuperCheckbox/>
         </div>
     )

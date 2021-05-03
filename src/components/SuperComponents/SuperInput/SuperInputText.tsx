@@ -46,7 +46,7 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
     return (
         <>
             <input
-                type={"text"}
+                type={type}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
                 className={finalInputClassName}
@@ -56,6 +56,6 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
             {error && <span className={finalSpanClassName}>{error}</span>}
         </>
     );
-}
+};
 
 export default SuperInputText;
