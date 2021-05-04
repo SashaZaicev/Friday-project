@@ -7,11 +7,20 @@ const instance = axios.create({
 
 export const userAPI = {
     signup(login: string, password: string) {
-        debugger
         return instance.post(`/auth/register`, {
-            "login": login, "pass": password, "admin": false, "deck": [
-                {"deckId": 1, "ratings": [{"id": 1, "checks": 5, "rating": 4.5}]}
-            ]
+            'email': login, 'password': password
         })
+            .then(response => {
+                return response.data
+                console.log(response)
+            })
+    }
+}
+export const timePing = {
+    ping(time: number) {
+        return instance.post(`/ping`, {frontTime: time})
+            .then(res => {
+                console.log(res)
+            })
     }
 }

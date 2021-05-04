@@ -30,14 +30,12 @@ export type CheckInUserType = {
     rememberMe: boolean
 
 }
-// type CheckInUserActionType = ReturnType<typeof checkInUserData>
 type PostLoginUserActionType = ReturnType<typeof actionsCheckIn.postLogin>
 type PostPasswordUserActionType = ReturnType<typeof actionsCheckIn.postPassword>
 type PostPassword2UserActionType = ReturnType<typeof actionsCheckIn.postRepeatPassword>
 type setSuccessUserActionType = ReturnType<typeof actionsCheckIn.setSuccess>
 type PostRememberUserActionType = ReturnType<typeof actionsCheckIn.postRememberMe>
 export type ActionsTypes =
-// | CheckInUserActionType
     | PostLoginUserActionType
     | PostPasswordUserActionType
     | PostPassword2UserActionType

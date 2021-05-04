@@ -48,9 +48,6 @@ export const checkInReducer = (state: CheckInUserType = initialState, action: Ac
     }
 };
 
-// export const checkInUserData = (login: string, password: string, rememberMe: boolean) => {
-//     return ({type: 'CHECK-IN-USER', payload: {login, password, rememberMe}}) as const
-// }
 export const actionsCheckIn = {
     postLogin: (login: string) => ({type: SET_LOGIN, login}) as const,
     postPassword: (password: string) => ({type: 'SET_PASSWORD', password}) as const,
@@ -59,8 +56,12 @@ export const actionsCheckIn = {
     postRememberMe: (rememberMe: boolean) => ({type: 'SET_REMEMBER_ME', rememberMe}) as const,
 }
 
-export const createUser = (login: string, password: string) => {debugger
-    return (dispatch: Dispatch) => {debugger
+export const createUserTC = (login: string, password: string) => {
+    return (dispatch: Dispatch) => {
         userAPI.signup(login, password)
+            .then(res=>{
+              dispatch(actionsCheckIn.setSuccess(true))
+                console.log(res)
+            })
     }
 }
