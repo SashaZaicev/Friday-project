@@ -15,16 +15,16 @@ type InitialStateType = typeof initialState
 export const recoverPasswordReducer = (state: InitialStateType = initialState, action: ActionsType) => {
     switch (action.type) {
         case "CHANGE_EMAIL": { // меняет значение email на пользовательский
-            return { ...state, email: action.email }
+            return {...state, email: action.email}
         }
         case "SET_STATUS": { // отображает крутилку :)
-            return { ...state, status: action.status }
+            return {...state, status: action.status}
         }
         case "INFO_MESSAGE": { // сообщение при успехе :р
-            return { ...state, infoMessage: action.infoMessage }
+            return {...state, infoMessage: action.infoMessage}
         }
         case "ERROR_MESSAGE": { // сообщение при наличии ошибки -_-
-            return { ...state, errorMessage: action.errorMessage }
+            return {...state, errorMessage: action.errorMessage}
         }
         default:
             return state;
@@ -38,7 +38,7 @@ export const infoMessageAC = (infoMessage: string) => ({type: "INFO_MESSAGE", in
 export const errorMessageAC = (errorMessage: string) => ({type: "ERROR_MESSAGE", errorMessage: errorMessage} as const);
 
 // thunks
-export const recoverPasswordTC = (email: string, from: string, message: string)  => {
+export const recoverPasswordTC = (email: string, from: string, message: string) => {
     return (dispatch: ThunkDispatch) => {
         dispatch(changeEmailAC(email))
         console.log(email)
@@ -47,14 +47,16 @@ export const recoverPasswordTC = (email: string, from: string, message: string) 
             .then((res) => {
                 dispatch(infoMessageAC(res.data.info))
                 console.log("then " + res.data.info)
+                setTimeout(() => dispatch(infoMessageAC('')), 3000)
             })
             .catch((error) => {
                 dispatch(errorMessageAC(error.response.data.error))
                 console.log("error " + error.response.data.error)
+                setTimeout(() => dispatch(errorMessageAC('')), 3000)
             })
-            .finally (() => {
-            dispatch(setStatusAC(false))
-        })
+            .finally(() => {
+                dispatch(setStatusAC(false))
+            })
     }
 }
 
