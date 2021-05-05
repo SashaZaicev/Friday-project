@@ -1,4 +1,5 @@
 import axios from "axios";
+import {actionsCheckIn} from "../bll/checkInReducer";
 
 
 const instance = axios.create({
@@ -7,20 +8,20 @@ const instance = axios.create({
 
 export const userAPI = {
     signup(login: string, password: string) {
-        return instance.post(`/auth/register`, {
+        return instance.post(`/auth/register/`, {
             'email': login, 'password': password
         })
-            .then(response => {
-                return response.data
-                console.log(response)
-            })
+            // .then(response => {
+            //
+            //     console.log(response)
+            // })
     }
 }
-export const timePing = {
-    ping(time: number) {
-        return instance.post(`/ping`, {frontTime: time})
-            .then(res => {
-                console.log(res)
-            })
-    }
-}
+// export const timePing = {
+//     ping(time: number) {
+//         return instance.post(`/ping`, {frontTime: time})
+//             .then(res => {
+//                 console.log(res)
+//             })
+//     }
+// }
