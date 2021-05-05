@@ -3,6 +3,9 @@
     border-radius: 3px;
     margin: 3px;
     cursor: pointer;
+    width: 110px;
+    border: 1px solid #000000;
+    font-size: 16px;
 }
 
 .default:hover {
@@ -10,19 +13,19 @@
 }
 
 .red {
-    font-size: 14px;
+    font-size: 16px;
     text-decoration: none;
     cursor: pointer;
-    width: 90px;
+    width: 110px;
     font-weight: bold;
     margin: 20px auto;
     padding: 1px 5px;
     border-radius: 4px;
     color: white;
-    background: red;
+    background: rgb(255, 0, 0);
     border: 1px solid white;
 }
 
 .red:hover {
-    background: #ec2626;
+    background: rgba(222, 0, 0, 0.8);
 }

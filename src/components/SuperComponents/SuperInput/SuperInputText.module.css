@@ -6,7 +6,7 @@
     line-height: 25px;
     border-radius: 30px;
     margin: 10px 20px;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
     color: #524f4e;
     background: white;
@@ -22,7 +22,7 @@
     line-height: 25px;
     border-radius: 30px;
     margin: 10px 20px;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
     color: #524f4e;
     background: white;
@@ -37,4 +37,11 @@
     font-size: 15px;
     letter-spacing: 1px;
     color: red;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

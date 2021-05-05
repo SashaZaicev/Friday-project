@@ -5,23 +5,25 @@ import s from "./SuperButton.module.css";
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 type SuperButtonPropsType = DefaultButtonPropsType & {
-    red?: boolean
+    error?: string
+    name?: string
 }
 
 const SuperButton: React.FC<SuperButtonPropsType> = (
     {
-        red, className,
+        error, className, name,
         ...restProps// все остальные пропсы попадут в объект restProps, там же будет children
     }
 ) => {
-    const finalClassName = `${red ? s.red : s.default} ${s.default}`;
+    const finalClassName = `${error ? s.red : s.default} ${s.default}`;
+    const nameButton = name ? name : "click"
 
     return (
         <button
             className={finalClassName}
-            onClick={() => alert("Hello!")}
+            onClick={() => "Hello"}
             {...restProps} // отдаём кнопке остальные пропсы если они есть (children там внутри)
-        >click</button>
+        >{nameButton}</button>
     );
 }
 
