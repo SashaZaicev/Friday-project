@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {ActionsTypes, CheckInUserType} from "../../../app/store";
 import {userAPI} from "../api/api";
+import {ActionsTypes, CheckInUserType} from "./storeCheckIn";
 
 export const initialState = {
     id: '1',

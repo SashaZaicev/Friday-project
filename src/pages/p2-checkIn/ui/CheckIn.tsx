@@ -25,7 +25,7 @@ export const CheckIn: React.FC = () => {
 
 
     const addUser = () => {
-        console.log('первый', password, 'второй', password2)
+        // console.log('первый', password, 'второй', password2)
         if (password != '' || password2 != '') {
             if (password === password2) {
                 dispatch(createUserTC(login, password))
@@ -61,7 +61,7 @@ export const CheckIn: React.FC = () => {
         setRememberMe(checkedRemember)
     }
 
-    // if (stateRegistrationIsSuccess) return <Redirect to={"/profile"}/>
+    if (stateRegistrationIsSuccess) return <Redirect to={"/profile"}/>
     const errInputLogin = (login === '' && stateRegistrationError) ? 'Обязательное поле' : '';
     const errInputPas = (password === '' && stateRegistrationError) ? 'Обязательное поле' : '';
     const errInputPas2 = (password2 === '' && stateRegistrationError) ? 'Обязательное поле' : '';

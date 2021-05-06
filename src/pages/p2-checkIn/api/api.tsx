@@ -11,10 +11,6 @@ export const userAPI = {
         return instance.post(`/auth/register/`, {
             'email': login, 'password': password
         })
-            // .then(response => {
-            //
-            //     console.log(response)
-            // })
     }
 }
 // export const timePing = {
