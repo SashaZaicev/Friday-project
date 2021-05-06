@@ -1,5 +1,5 @@
 import React, {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
-import s from "./SuperButton.module.css";
+import s from "./SBtn.module.css";
 
 // тип пропсов обычной кнопки, children в котором храниться название кнопки там уже описан
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
@@ -11,7 +11,7 @@ type SuperButtonPropsType = DefaultButtonPropsType & {
     callFunction?: () => void //добавил для типизации функции
 }
 
-const SuperButton: React.FC<SuperButtonPropsType> = (
+const SBtn: React.FC<SuperButtonPropsType> = (
     {
         callFunction,//добавил для вызова функции
         red, className, name,
@@ -30,4 +30,4 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
     );
 }
 
-export default SuperButton;
+export default SBtn;

@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunkMiddleware from 'redux-thunk'
 import {loginReducer} from "../pages/p1-login/bll/loginReducer";
+import thunkMiddleware from "redux-thunk"
 import {checkInReducer} from "../pages/p2-checkIn/bll/checkInReducer";
 import {profileReducer} from "../pages/p3-profile/bll/profileReducer";
 import {recoverPasswordReducer} from "../pages/p5-recoverPassword/bll/recoverPasswordReducer";

@@ -1,5 +1,5 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent} from "react";
-import s from "./SuperInputText.module.css";
+import s from "./SInp.module.css";
 
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
@@ -16,7 +16,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё проп
     value?: string
 };
 
-const SuperInputText: React.FC<SuperInputTextPropsType> = (
+const SInp: React.FC<SuperInputTextPropsType> = (
     {
         type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
         onChange, onChangeText,
@@ -69,4 +69,4 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
     );
 };
 
-export default SuperInputText;
+export default SInp;
