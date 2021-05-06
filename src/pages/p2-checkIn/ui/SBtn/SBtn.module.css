@@ -1,0 +1,31 @@
+.default {
+    font-weight: bold;
+    border-radius: 3px;
+    margin: 3px;
+    cursor: pointer;
+    width: 110px;
+    border: 1px solid #000000;
+    font-size: 16px;
+}
+
+.default:hover {
+    background: #b3affa;
+}
+
+.red {
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    width: 110px;
+    font-weight: bold;
+    margin: 20px auto;
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: white;
+    background: rgb(255, 0, 0);
+    border: 1px solid white;
+}
+
+.red:hover {
+    background: rgba(222, 0, 0, 0.8);
+}

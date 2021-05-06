@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import SuperInputText from "../../../components/SuperComponents/SuperInput/SuperInputText";
-import SuperButton from "../../../components/SuperComponents/SuperButton/SuperButton";
 import s from './CheckIn.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {
     actionsCheckIn, createUserTC,
 } from "../bll/checkInReducer";
-import SuperCheckbox from "../../../components/SuperComponents/SuperCheckbox/SuperCheckbox";
 // import {timePing, userAPI} from "../api/api";
 import {AppRootStateType} from "../../../app/store";
 import {Redirect} from "react-router-dom";
+import SBtn from "./SBtn/SBtn";
+import SCBox from "./SCBox/SCBox";
+import SInp from "./SInp/SInp";
 
 export const CheckIn: React.FC = () => {
 
@@ -79,7 +79,7 @@ export const CheckIn: React.FC = () => {
 
             <label>Email:
                 <label className={s.help}>Example: Alex@company.com</label>
-                <SuperInputText
+                <SInp
                     error={errInputLogin}
                     value={login}
                     onChange={onLoginChange}
@@ -90,7 +90,7 @@ export const CheckIn: React.FC = () => {
                 <label className={s.help}>Example: Must be between
                     8-20 character </label>
 
-                <SuperInputText
+                <SInp
                     error={errInputPas}
                     value={password}
                     onChange={onPasswordChange}
@@ -101,7 +101,7 @@ export const CheckIn: React.FC = () => {
             <label>Confirm password:
                 <label className={s.help}>Example: Must be between
                     8-20 character </label>
-                <SuperInputText
+                <SInp
                     error={errInputPas2}
                     value={password2}
                     onChange={repeatOnPasswordChange}
@@ -110,11 +110,12 @@ export const CheckIn: React.FC = () => {
                 />
             </label>
             <div className={s.checkInBtn}>
-                <SuperButton callFunction={addUser}
-                             name={'Register'}
-                             disabled={!!stateLoading}
+                <SBtn callFunction={addUser}
+                      name={'Register'}
+                      disabled={!!stateLoading}
+
                 />
-                <SuperCheckbox onChange={setRememberMeChange}/>
+                <SCBox onChange={setRememberMeChange}/>
             </div>
             <a href="#/login">Sign In</a>
         </div>
