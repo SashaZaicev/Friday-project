@@ -8,9 +8,12 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 // (чтоб не писать value: string, onChange: ...; они уже все описаны в DefaultInputPropsType)
 type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё пропсы которых нет в стандартном инпуте
     onChangeText?: (value: string) => void
+    onChangeValue?: (value: string) => void // меняем в стейте на email пользователя
     onEnter?: () => void
+    info?: string
     error?: string
     spanClassName?: string
+    value?: string
 };
 
 const SuperInputText: React.FC<SuperInputTextPropsType> = (
@@ -18,8 +21,11 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
         type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
         onChange, onChangeText,
         onKeyPress, onEnter,
+        info,
         error,
         className, spanClassName,
+        onChangeValue,
+        value,
 
         ...restProps// все остальные пропсы попадут в объект restProps
     }
@@ -28,7 +34,8 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
         onChange // если есть пропс onChange
         && onChange(e); // то передать ему е (поскольку onChange не обязателен)
 
-        onChangeText && onChangeText(e.currentTarget.value);
+        onChangeText && onChangeText(e.currentTarget.value)
+        onChangeValue && onChangeValue(e.currentTarget.value) // меняем в стейте на email пользователя
     }
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
         onKeyPress && onKeyPress(e);
@@ -39,22 +46,26 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
     }
 
     const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ""}`;
-    const finalInputClassName = `{ ${error ? s.errorInput : s.superInput} ${className}`; // need to fix
-    // with (?:)
-    // and s.superInput
+    const finalInputClassName = `{ ${error ? s.errorInput : s.superInput} ${className}`;
 
     return (
-        <>
-            <input
-                type={"text"}
-                onChange={onChangeCallback}
-                onKeyPress={onKeyPressCallback}
-                className={finalInputClassName}
+        <div className={s.content}>
+            <div>
+                <input
+                    type={"text"}
+                    onChange={onChangeCallback}
+                    onKeyPress={onKeyPressCallback}
+                    className={finalInputClassName}
+                    value={value}
 
-                {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
-            />
-            {error && <span className={finalSpanClassName}>{error}</span>}
-        </>
+                    {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
+                />
+            </div>
+            <div>
+                {error && <span className={finalSpanClassName}>{error}</span>}
+                {info && <span>{info}</span>}
+            </div>
+        </div>
     );
 }
 

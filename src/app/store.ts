@@ -1,4 +1,5 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import thunkMiddleware from 'redux-thunk'
 import {loginReducer} from "../pages/p1-login/bll/loginReducer";
 import {checkInReducer} from "../pages/p2-checkIn/bll/checkInReducer";
 import {profileReducer} from "../pages/p3-profile/bll/profileReducer";
@@ -13,7 +14,7 @@ const rootReducer = combineReducers({
     newPassword: newPasswordReducer
 })
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
