@@ -89,6 +89,7 @@ export const CheckIn: React.FC = () => {
             <label>Password:
                 <label className={s.help}>Example: Must be between
                     8-20 character </label>
+
                 <SuperInputText
                     error={errInputPas}
                     value={password}
@@ -110,7 +111,7 @@ export const CheckIn: React.FC = () => {
             </label>
             <div className={s.checkInBtn}>
                 <SuperButton callFunction={addUser}
-                             title={'Register'}
+                             name={'Register'}
                              disabled={!!stateLoading}
                 />
                 <SuperCheckbox onChange={setRememberMeChange}/>
