@@ -18,7 +18,7 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
         ...restProps// все остальные пропсы попадут в объект restProps, там же будет children
     }
 ) => {
-    const finalClassName = `${red ? s.red : s.default} ${s.default}`;
+    const finalClassName = `${error ? s.red : s.default} ${s.default}`;
     const nameButton = name ? name : "click"
 
     return (
@@ -26,7 +26,6 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
             className={finalClassName}
             onClick={() => callFunction ? callFunction() : ""} //изменил для приходящей функции
             {...restProps} // отдаём кнопке остальные пропсы если они есть (children там внутри)
-            // Появится возможность кнопке давать любое имя
         >{nameButton}</button>
     );
 }
