@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/login-api";
+import {Redirect} from "react-router-dom";
 
 const initialState = {
     email: '',
@@ -19,6 +20,8 @@ export const loginReducer = (state: InitialStateType = initialState, action: any
             return {...state, rememberMe: action.rememberMe}
         case 'login/SET_ERROR-TEXT':
             return {...state, errorText: action.text}
+        case 'login/SET-IS-LOGGED-IN':
+            return {...state, isLoggedIn: action.value}
         default:
             return {...state}
     }
@@ -36,11 +39,11 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
     authAPI.login(data)
         .then(res => {
                 dispatch(setIsLoggedInAC(true))
-
                 console.log(res)
             }
         )
         .catch(err => {
+            dispatch(setIsLoggedInAC(false))
             console.log(err.response.data.error)
             dispatch(setErrorTextAC(err.response.data.error))
         })

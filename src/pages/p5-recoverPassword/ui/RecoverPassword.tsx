@@ -18,7 +18,7 @@ export const RecoverPassword = () => {
     const recoverPassword = (email: string, from: string, message: string) => {
         dispatch(recoverPasswordTC(email, from, message))
     }
-    const preloader = status ? <img src={nya} alt={''}/>  : '' // отображение крутилки
+    const preloader = status ? <img src={nya} alt={''}/> : '' // отображение крутилки
 
     return (
         <div className={s.content}>
