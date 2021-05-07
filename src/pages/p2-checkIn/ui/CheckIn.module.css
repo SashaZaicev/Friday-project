@@ -1,0 +1,50 @@
+.checkInBlock {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.checkInTitle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.checkInBtn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.checkInBlock a:visited {
+    color: black;
+}
+
+.checkInBlock a {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.checkInBlock label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+
+}
+
+.checkInBlock label input {
+    padding-left: 5px;
+    margin-bottom: 0;
+}
+
+.help {
+    display: flex;
+    font-size: x-small;
+    color: #757575;
+}
