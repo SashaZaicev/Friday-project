@@ -40,7 +40,8 @@ export const Login = () => {
             <div>
                 <SuperInputText value={password} onChangeText={(value) => {
                     dispatch(setPasswordAC(value))
-                }}/>
+                }
+                }/>
             </div>
 
             <div>

@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/login-api";
-import {Redirect} from "react-router-dom";
 
 const initialState = {
     email: '',
@@ -10,7 +9,8 @@ const initialState = {
     errorText: ''
 }
 
-export const loginReducer = (state: InitialStateType = initialState, action: any) => {
+export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+
     switch (action.type) {
         case 'login/SET_EMAIL':
             return {...state, email: action.email}
@@ -32,19 +32,17 @@ export const setIsLoggedInAC = (value: boolean) => ({type: 'login/SET-IS-LOGGED-
 export const setEmailAC = (email: string) => ({type: 'login/SET_EMAIL', email} as const)
 export const setPasswordAC = (password: string) => ({type: 'login/SET_PASSWORD', password} as const)
 export const setRememberMeAC = (rememberMe: boolean) => ({type: 'login/SET_REMEMBER-ME', rememberMe} as const)
-export const setErrorTextAC = (text: boolean) => ({type: 'login/SET_ERROR-TEXT', text} as const)
+export const setErrorTextAC = (text: string) => ({type: 'login/SET_ERROR-TEXT', text} as const)
 
 // thunk
-export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
+export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
     authAPI.login(data)
         .then(res => {
                 dispatch(setIsLoggedInAC(true))
-                console.log(res)
             }
         )
         .catch(err => {
             dispatch(setIsLoggedInAC(false))
-            console.log(err.response.data.error)
             dispatch(setErrorTextAC(err.response.data.error))
         })
 }
@@ -57,3 +55,14 @@ export type LoginParamsType = {
     password: string
     rememberMe: boolean
 }
+export type setIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>
+export type setEmailACType = ReturnType<typeof setEmailAC>
+export type setPasswordACType = ReturnType<typeof setPasswordAC>
+export type setRememberMeACType = ReturnType<typeof setRememberMeAC>
+export type setErrorTextACType = ReturnType<typeof setErrorTextAC>
+type ActionsType =
+    setIsLoggedInACType
+    | setEmailACType
+    | setPasswordACType
+    | setRememberMeACType
+    | setErrorTextACType
