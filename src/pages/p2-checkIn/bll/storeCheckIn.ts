@@ -8,6 +8,7 @@ export type CheckInUserType = {
     rememberMe: boolean,
     error: boolean,
     loading: boolean
+    errorServer: string
 
 }
 type SetLoginUserActionType = ReturnType<typeof actionsCheckIn.setLogin>
@@ -16,7 +17,9 @@ type PostPassword2UserActionType = ReturnType<typeof actionsCheckIn.postRepeatPa
 type SetSuccessUserActionType = ReturnType<typeof actionsCheckIn.setSuccess>
 type SetLoadingUserActionType = ReturnType<typeof actionsCheckIn.setLoading>
 type SetErrorUserActionType = ReturnType<typeof actionsCheckIn.setError>
+type SetErrServActionType = ReturnType<typeof actionsCheckIn.setErrServ>
 type PostRememberUserActionType = ReturnType<typeof actionsCheckIn.postRememberMe>
+
 export type ActionsTypes =
     | SetLoginUserActionType
     | PostPasswordUserActionType
@@ -25,3 +28,4 @@ export type ActionsTypes =
     | SetSuccessUserActionType
     | SetErrorUserActionType
     | SetLoadingUserActionType
+    | SetErrServActionType

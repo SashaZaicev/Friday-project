@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {userAPI} from "../api/api";
 import {ActionsTypes, CheckInUserType} from "./storeCheckIn";
+import {infoMessageAC} from "../../p5-recoverPassword/bll/recoverPasswordReducer";
 
 export const initialState = {
     id: '1',
@@ -10,10 +11,12 @@ export const initialState = {
     isSuccess: false,
     rememberMe: false,
     error: false,
-    loading: false
+    loading: false,
+    errorServer: ''
 };
 const SET_LOGIN = "SET_LOGIN"
 const SET_ERROR = "SET_ERROR"
+const SET_ERR_SERV = "SET_ERR_SERV"
 const SET_PASSWORD = "SET_PASSWORD"
 const SET_REPEAT_PASSWORD = "SET_REPEAT_PASSWORD"
 const SET_SUCCESS = "SET_SUCCESS"
@@ -58,6 +61,12 @@ export const checkInReducer = (state: CheckInUserType = initialState, action: Ac
                 error: action.error
             };
         }
+        case  SET_ERR_SERV: {
+            return {
+                ...state,
+                errorServer: action.err
+            };
+        }
         case SET_REMEMBER_ME: {
             return {
                 ...state,
@@ -76,6 +85,7 @@ export const actionsCheckIn = {
     setSuccess: (isSuccess: boolean) => ({type: 'SET_SUCCESS', isSuccess}) as const,
     setLoading: (loading: boolean) => ({type: 'SET_LOADING', loading}) as const,
     setError: (error: boolean) => ({type: SET_ERROR, error}) as const,
+    setErrServ: (err: string) => ({type: SET_ERR_SERV, err}) as const,
     postRememberMe: (rememberMe: boolean) => ({type: 'SET_REMEMBER_ME', rememberMe}) as const,
 }
 
@@ -83,9 +93,15 @@ export const createUserTC = (login: string, password: string) => {
     return (dispatch: Dispatch) => {
         userAPI.signup(login, password)
             .then(res => {
-               ( (res.status === 201) ?
-                (dispatch(actionsCheckIn.setLoading(false)) && dispatch(actionsCheckIn.setSuccess(true)))
-                   :  console.log(res.data))
+                dispatch(actionsCheckIn.setLoading(false))
+                dispatch(actionsCheckIn.setSuccess(true))
+                setTimeout(() => dispatch(actionsCheckIn.setSuccess(false)), 3000)
             })
+        .catch(er => {
+            console.log(er)
+            dispatch(actionsCheckIn.setLoading(false))
+            dispatch(actionsCheckIn.setErrServ(er.response.data.error))
+            setTimeout(() => dispatch(actionsCheckIn.setErrServ('')), 3000)
+        })
     }
 }
