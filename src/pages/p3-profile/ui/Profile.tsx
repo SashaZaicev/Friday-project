@@ -3,6 +3,7 @@ import {actionsCheckIn} from "../../p2-checkIn/bll/checkInReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../../app/store";
+import {PATH} from "../../../components/routes/Routes";
 
 export const Profile = () => {
     const dispatch = useDispatch();
@@ -12,8 +13,7 @@ export const Profile = () => {
     }
     const stateRegistrationIsSuccess = useSelector<AppRootStateType>(state => state.registration.isSuccess)
 
-    if (!stateRegistrationIsSuccess) return <Redirect to={"/check-in"}/>
-
+    // if (stateRegistrationIsSuccess) return <Redirect to={"/check-in"}/>
     return (
         <>
             Profile

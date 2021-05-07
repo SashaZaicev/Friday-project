@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import s from './CheckIn.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {
     actionsCheckIn, createUserTC,
 } from "../bll/checkInReducer";
-// import {timePing, userAPI} from "../api/api";
 import {AppRootStateType} from "../../../app/store";
 import {Redirect} from "react-router-dom";
 import SBtn from "./SBtn/SBtn";
 import SCBox from "./SCBox/SCBox";
 import SInp from "./SInp/SInp";
+import {PATH} from "../../../components/routes/Routes";
 
 export const CheckIn: React.FC = () => {
 
@@ -21,12 +21,12 @@ export const CheckIn: React.FC = () => {
     const [rememberMe, setRememberMe] = useState(false)
     const stateRegistrationIsSuccess = useSelector<AppRootStateType>(state => state.registration.isSuccess)
     const stateRegistrationError = useSelector<AppRootStateType>(state => state.registration.error)
+    const errorServer = useSelector<AppRootStateType>(state => state.registration.errorServer)
     const stateLoading = useSelector<AppRootStateType>(state => state.registration.loading)
-
-
+    // console.log(errorServer)
     const addUser = () => {
         // console.log('первый', password, 'второй', password2)
-        if (password != '' || password2 != '') {
+        if (password != '' && password2 != '' && login != '') {
             if (password === password2) {
                 dispatch(createUserTC(login, password))
                 dispatch(actionsCheckIn.setLoading(true))
@@ -55,13 +55,13 @@ export const CheckIn: React.FC = () => {
         let repeatPassword = e.currentTarget.value
         setPassword2(repeatPassword)
     }
-    //какой выбрать тип
-    const setRememberMeChange = (e: React.FormEvent<any>) => {
+
+    const setRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let checkedRemember = e.currentTarget.checked
         setRememberMe(checkedRemember)
     }
 
-    if (stateRegistrationIsSuccess) return <Redirect to={"/profile"}/>
+    if (stateRegistrationIsSuccess) return <Redirect to={PATH.LOGIN}/>
     const errInputLogin = (login === '' && stateRegistrationError) ? 'Обязательное поле' : '';
     const errInputPas = (password === '' && stateRegistrationError) ? 'Обязательное поле' : '';
     const errInputPas2 = (password2 === '' && stateRegistrationError) ? 'Обязательное поле' : '';
@@ -70,8 +70,8 @@ export const CheckIn: React.FC = () => {
             <h2 className={s.checkInTitle}>Registration</h2>
             {stateLoading
                 ? <div style={{color: 'orange'}}>loading...</div>
-                : stateRegistrationError
-                    ? <div style={{color: 'red'}}>{"УПС ошибочка..."}</div>
+                : (stateRegistrationError || errorServer)
+                    ? <div style={{color: 'red'}}> {errorServer ? errorServer : "УПС ошибочка..."}</div>
                     : stateRegistrationIsSuccess
                         ? <div style={{color: 'lime'}}>Success!</div>
                         : <div><br/></div>
@@ -89,7 +89,6 @@ export const CheckIn: React.FC = () => {
             <label>Password:
                 <label className={s.help}>Example: Must be between
                     8-20 character </label>
-
                 <SInp
                     error={errInputPas}
                     value={password}
