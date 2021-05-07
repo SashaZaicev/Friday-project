@@ -1,0 +1,12 @@
+.flexMainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgot {
+    display: flex;
+    justify-content: space-around;
+    width: 270px;
+}

@@ -1,23 +1,13 @@
 import React from 'react'
-import {actionsCheckIn} from "../../p2-checkIn/bll/checkInReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {Redirect} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../app/store";
 import {PATH} from "../../../components/routes/Routes";
 
 export const Profile = () => {
-    const dispatch = useDispatch();
-    const goOut = () => {
-        dispatch(actionsCheckIn.setSuccess(false))
-        dispatch(actionsCheckIn.setLoading(false))
-    }
-    const stateRegistrationIsSuccess = useSelector<AppRootStateType>(state => state.registration.isSuccess)
-
-    // if (stateRegistrationIsSuccess) return <Redirect to={"/check-in"}/>
+    const email = useSelector<AppRootStateType, string>(state => state.login.email)
     return (
         <>
-            Profile
-            <button onClick={goOut}>OUT</button>
+            Profile user with email: {email}
         </>
     )
 }
