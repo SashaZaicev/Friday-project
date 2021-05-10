@@ -23,13 +23,12 @@ export const Routes = () => {
     return (
         <div>
             <Switch>
-                <Route exact path={"/"} render={() => <Redirect to={PATH.PROFILE}/>}/>
                 <Route exact path={PATH.CHECK_IN} render={() => <CheckIn/>}/>
-                <Route exact path={PATH.LOGIN} render={() => <Login/>}/>
+                <Route exact path={['/', PATH.LOGIN]} render={() => <Login/>}/>
                 <Route exact path={PATH.NEW_PASSWORD} render={() => <NewPassword/>}/>
                 <Route exact path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route exact path={PATH.PASSWORD_RECOVERY} render={() => <RecoverPassword/>}/>
-                <Route exact path={PATH.TEST_COMPONENT} render={() => <Test/>}/>
+                {/*<Route exact path={PATH.TEST_COMPONENT} render={() => <Test/>}/>*/}
                 <Route path={PATH.ERROR_404} render={() => <Error/>}/>
                 <Redirect from={'*'} to={PATH.ERROR_404}/>
             </Switch>

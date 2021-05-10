@@ -1,0 +1,9 @@
+.header {
+    display: flex;
+    border: black 1px solid;
+    justify-content: space-around;
+}
+
+.item {
+    border: #1fd212 1px solid;
+}
