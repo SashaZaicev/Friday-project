@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
+import {userAPI} from "../api/api";
 import {ActionsTypes, CheckInUserType} from "./storeCheckIn";
 import {infoMessageAC} from "../../p5-recoverPassword/bll/recoverPasswordReducer";
-import {authAPI} from "../../../api/api";
 
 export const initialState = {
     id: '1',
@@ -91,17 +91,17 @@ export const actionsCheckIn = {
 
 export const createUserTC = (login: string, password: string) => {
     return (dispatch: Dispatch) => {
-        authAPI.signup(login, password)
+        userAPI.signup(login, password)
             .then(res => {
                 dispatch(actionsCheckIn.setLoading(false))
                 dispatch(actionsCheckIn.setSuccess(true))
                 setTimeout(() => dispatch(actionsCheckIn.setSuccess(false)), 3000)
             })
-            .catch(er => {
-                console.log(er)
-                dispatch(actionsCheckIn.setLoading(false))
-                dispatch(actionsCheckIn.setErrServ(er.response.data.error))
-                setTimeout(() => dispatch(actionsCheckIn.setErrServ('')), 3000)
-            })
+        .catch(er => {
+            console.log(er)
+            dispatch(actionsCheckIn.setLoading(false))
+            dispatch(actionsCheckIn.setErrServ(er.response.data.error))
+            setTimeout(() => dispatch(actionsCheckIn.setErrServ('')), 3000)
+        })
     }
 }
