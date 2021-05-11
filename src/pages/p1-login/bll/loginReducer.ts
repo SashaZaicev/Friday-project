@@ -55,7 +55,6 @@ export const logOutTC = () => (dispatch: Dispatch) => {
             }
         )
         .catch(e => {
-            // dispatch(setIsLoggedInAC(false)) // чтобы log out работал
             const error = e.response
                 ? e.response.data.error
                 : (e.message + ', more details in the console')

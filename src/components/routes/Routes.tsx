@@ -28,7 +28,7 @@ export const Routes = () => {
             <Switch>
                 <Route exact path={PATH.CHECK_IN} render={() => <CheckIn/>}/>
                 <Route exact path={['/', PATH.LOGIN]} render={() => <Login/>}/>
-                <Route exact path={PATH.NEW_PASSWORD} render={() => <NewPassword/>}/>
+                <Route path={PATH.NEW_PASSWORD} render={() => <NewPassword/>}/>
                 <Route exact path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route exact path={PATH.PASSWORD_RECOVERY} render={() => <RecoverPassword/>}/>
                 <Route exact path={PATH.PACKS} render={() => <Packs/>}/>
