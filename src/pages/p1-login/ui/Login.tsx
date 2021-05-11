@@ -1,36 +1,36 @@
-import React from 'react'
+import React, {useState} from 'react'
 import SuperInputText from "../../../components/SuperComponents/SuperInput/SuperInputText";
 import s from './login.module.css'
 import SuperCheckbox from "../../../components/SuperComponents/SuperCheckbox/SuperCheckbox";
 import SuperButton from "../../../components/SuperComponents/SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from '../../../app/store';
-import {loginTC, setEmailAC, setPasswordAC, setRememberMeAC} from "../bll/loginReducer";
-import {Redirect} from "react-router-dom";
+import {loginTC} from "../bll/loginReducer";
+import {NavLink, Redirect} from "react-router-dom";
 import {PATH} from "../../../components/routes/Routes";
 
 export const Login = () => {
     const dispatch = useDispatch()
 
-    const email = useSelector<AppRootStateType, string>(state => state.login.email)
-    const password = useSelector<AppRootStateType, string>(state => state.login.password)
-    const rememberMe = useSelector<AppRootStateType, boolean>(state => state.login.rememberMe)
+    let [email, setEmail] = useState<string>('nya-admin@nya.nya')
+    let [password, setPassword] = useState<string>('1qazxcvBG')
+    let [rememberMe, setRememberMe] = useState<boolean>(false)
+
     const error = useSelector<AppRootStateType, string>(state => state.login.errorText)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
 
     if (isLoggedIn) {
         return <Redirect to={PATH.PROFILE}/>
     }
 
+
     return (
         <div className={s.flexMainContainer}>
             <h3>Login Page</h3>
-
             <div>Email</div>
             <div>
-
                 <SuperInputText onChangeText={(value) => {
-                    dispatch(setEmailAC(value))
+                    setEmail(value)
                 }}
                                 value={email}
                                 error={error}/>
@@ -38,17 +38,18 @@ export const Login = () => {
 
             <div>Password</div>
             <div>
-                <SuperInputText value={password} onChangeText={(value) => {
-                    dispatch(setPasswordAC(value))
-                }
-                }/>
+                <SuperInputText value={password}
+                                onChangeText={(value) => {
+                                    setPassword(value)
+                                }}/>
             </div>
 
             <div>
                 <span>Remember me</span>
-                <SuperCheckbox value={rememberMe.toString()} onChangeChecked={(value) => {
-                    dispatch(setRememberMeAC(value))
-                }}/>
+                <SuperCheckbox checked={rememberMe}
+                               onChangeChecked={(value) => {
+                                   setRememberMe(value)
+                               }}/>
             </div>
 
             <div>
@@ -62,10 +63,10 @@ export const Login = () => {
 
             <div className={s.forgot}>
                 <div>
-                    <a href="#recover_password">forgot password?</a>
+                    <NavLink to={PATH.PASSWORD_RECOVERY}>forgot password?</NavLink>
                 </div>
                 <div>
-                    <a href="#check-in">register</a>
+                    <NavLink to={PATH.CHECK_IN}>registration</NavLink>
                 </div>
             </div>
 

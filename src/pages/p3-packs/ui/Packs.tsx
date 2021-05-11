@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const NewPassword = () => {
+export const Packs = () => {
     return (
         <>
-            NewPassword
+            Packs
         </>
     )
 }

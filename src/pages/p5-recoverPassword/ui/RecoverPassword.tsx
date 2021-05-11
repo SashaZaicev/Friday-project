@@ -1,40 +1,33 @@
-import React, {useState} from 'react'
+import React from 'react'
 import s from './../recoverPassword.module.css'
+import nya from './PYh.gif'
 import SuperInputText from "../../../components/SuperComponents/SuperInput/SuperInputText";
 import SuperButton from "../../../components/SuperComponents/SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {recoverPasswordTC} from "../bll/recoverPasswordReducer";
+import {recoverPasswordTC, changeEmailAC} from "../bll/recoverPasswordReducer";
 import {AppRootStateType} from "../../../app/store";
-import Preloader from "../../../components/preloader/Preloader";
 
 export const RecoverPassword = () => {
     const dispatch = useDispatch()
-    const [email, setEmail] = useState<string>('')
-
+    const email = useSelector<AppRootStateType, string>(state => state.recoverPassword.email)
     const from = useSelector<AppRootStateType, string>(state => state.recoverPassword.from)
     const message = useSelector<AppRootStateType, string>(state => state.recoverPassword.message)
     const info = useSelector<AppRootStateType, string>(state => state.recoverPassword.infoMessage)
     const error = useSelector<AppRootStateType, string>(state => state.recoverPassword.errorMessage)
     const status = useSelector<AppRootStateType, boolean>(state => state.recoverPassword.status)
-    const recoverPassword = (setEmail: string, from: string, message: string) => {
-        dispatch(recoverPasswordTC(setEmail, from, message))
+    const recoverPassword = (email: string, from: string, message: string) => {
+        dispatch(recoverPasswordTC(email, from, message))
     }
-
-    const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-        let email = e.currentTarget.value
-        setEmail(email)
-    }
+    const preloader = status ? <img src={nya} alt={''}/> : '' // отображение крутилки
 
     return (
         <div className={s.content}>
-            { status ? <Preloader/> : "" } {/*// крутилка*/}
-            <h3> Enter your email </h3>
+            <div className={s.preloader}> {preloader} </div>
             <div>
-                <SuperInputText type={'text'}
-                                value={email}
+                <SuperInputText value={email}
                                 info={info}
                                 error={error}
-                                onChange={onChange}/>
+                                onChangeValue={(email) => dispatch(changeEmailAC(email))}/>
             </div>
             <div>
                 <SuperButton name={"Recover password"}
