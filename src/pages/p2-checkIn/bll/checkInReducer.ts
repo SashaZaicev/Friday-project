@@ -103,5 +103,11 @@ export const createUserTC = (login: string, password: string) => {
                 dispatch(actionsCheckIn.setErrServ(er.response.data.error))
                 setTimeout(() => dispatch(actionsCheckIn.setErrServ('')), 3000)
             })
+        .catch(er => {
+            console.log(er)
+            dispatch(actionsCheckIn.setLoading(false))
+            dispatch(actionsCheckIn.setErrServ(er.response.data.error))
+            setTimeout(() => dispatch(actionsCheckIn.setErrServ('')), 3000)
+        })
     }
 }
