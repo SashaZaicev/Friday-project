@@ -12,7 +12,7 @@ import {Cards} from "../../pages/p3-cards/ui/Cards";
 export const PATH = {
     HOME_PAGE: '/',
     LOGIN: '/login',
-    NEW_PASSWORD: '/new-password',
+    NEW_PASSWORD: '/new-password/:token',
     CHECK_IN: '/check-in',
     PROFILE: '/profile',
     PASSWORD_RECOVERY: '/recover_password',

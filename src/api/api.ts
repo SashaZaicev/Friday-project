@@ -24,6 +24,9 @@ export const authAPI = {
     },
     recoverPassword(email: string, from: string, message: string) {
         return instance.post<ResponseType>('auth/forgot', {email, from, message});
+    },
+    changePassword(newPassword: string, token: string | undefined) {
+        return instance.post<ResponseType>('auth/set-new-password', {newPassword, token})
     }
 }
 
