@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {newPasswordAPI} from "../../p5-recoverPassword/api/apiRP";
+import {authAPI} from "../../../api/api";
 
 const initialState = {
     errorPassMessage: "",
@@ -37,7 +37,7 @@ export const newPasswordTC = (newPassword: string, token: string) => {
         dispatch(setServerStatusAC(true))
         console.log(newPassword)
         console.log(token)
-        newPasswordAPI.changePassword(newPassword, token)
+        authAPI.changePassword(newPassword, token)
             .then((res) => {
                 dispatch(setServerStatusAC(false))
                 console.log("в then все ок")
