@@ -3,8 +3,8 @@ import {commonAPI} from "../../../api/api";
 
 const initialState = {
     email: null as null || "",
-    from: "test-front-admin <ai73a@yandex.by>",
-    message: `<div style="background-color: #00ff00; padding: 15px">password recovery link: <a href='http://localhost:3000/Friday-project#/new-password/$token$'>link</a></div>`,
+    from: "ai73a@yandex.by",
+    message: `<div style="background-color: #00ff00; padding: 15px">password recovery link: <a href='https://nataliakirik.github.io/Friday-project/#/new-password/$token$'>link</a></div>`,
     errorMessage: "",
     infoMessage: "",
     status: false
