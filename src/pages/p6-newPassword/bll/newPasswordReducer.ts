@@ -35,8 +35,6 @@ export const setServerStatusAC = (status: boolean) => ({type: "newPassword/SET_S
 export const newPasswordTC = (newPassword: string, token: string) => {
     return (dispatch: ThunkDispatch) => {
         dispatch(setServerStatusAC(true))
-        console.log(newPassword)
-        console.log(token)
         authAPI.changePassword(newPassword, token)
             .then((res) => {
                 dispatch(setServerStatusAC(false))

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
-import {CheckIn} from "../../pages/p2-checkIn/ui/CheckIn";
+import {Registration} from "../../pages/p2-registration/ui/Registration";
 import {Login} from "../../pages/p1-login/ui/Login";
 import {NewPassword} from "../../pages/p6-newPassword/ui/NewPassword";
 import {Profile} from "../../pages/p3-profile/ui/Profile";
@@ -9,11 +9,12 @@ import {Error} from "../../pages/p4-404/ui/Error";
 import {Packs} from "../../pages/p3-packs/ui/Packs";
 import {Cards} from "../../pages/p3-cards/ui/Cards";
 
+
 export const PATH = {
     HOME_PAGE: '/',
     LOGIN: '/login',
     NEW_PASSWORD: '/new-password/:token',
-    CHECK_IN: '/check-in',
+    REGISTRATION: '/registration',
     PROFILE: '/profile',
     PASSWORD_RECOVERY: '/recover_password',
     TEST_COMPONENT: '/testComponent',
@@ -26,7 +27,7 @@ export const Routes = () => {
     return (
         <div>
             <Switch>
-                <Route exact path={PATH.CHECK_IN} render={() => <CheckIn/>}/>
+                <Route exact path={PATH.REGISTRATION} render={() => <Registration/>}/>
                 <Route exact path={['/', PATH.LOGIN]} render={() => <Login/>}/>
                 <Route path={PATH.NEW_PASSWORD} render={() => <NewPassword/>}/>
                 <Route exact path={PATH.PROFILE} render={() => <Profile/>}/>
