@@ -4,13 +4,13 @@ import s from './table.module.css'
 export const Packs = () => {
     return (
         <>
-            Packs
+            <h5>Packs page</h5>
             table
             <div className={s.table}>
                 <div className={s.tableHeader}>
                     <div className={s.tableHeader_packsName}>Name</div>
-                    <div className={s.tableHeader_price}>cardsCount</div>
-                    <div className={s.tableHeader_price}>cardsCount</div>
+                    <div className={s.tableHeader_cardsCount}>cardsCount</div>
+                    <div className={s.tableHeader_updated}>updated</div>
                     <div className={s.tableHeader_buttonAdd}>
                         <button>add</button>
                     </div>

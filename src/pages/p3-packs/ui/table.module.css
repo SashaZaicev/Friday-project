@@ -13,32 +13,46 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
-.tableHeader_productName {
-    width: 60%;
-}
-
-.tableHeader_price {
+.tableHeader_packsName {
     width: 25%;
-    display: flex;
-    align-items: center;
+}
+
+.tableHeader_cardsCount {
+    width: 10%;
+}
+
+.tableHeader_updated {
+    width: 35%;
 }
 
 .tableHeader_buttonAdd {
-    width: 15%;
+    width: 20%;
 }
 
 
 .tableBody {
     border: 1px solid lime;
     width: 100%;
-}
-
-.tableBody_item {
-    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+}
+
+.tableBody_name {
+    width: 25%;
+}
+
+.tableBody_cardsCount {
+    width: 10%;
+}
+
+.tableBody_updated {
+    width: 35%;
+}
+
+.tableBody_buttons {
+    width: 20%;
 }

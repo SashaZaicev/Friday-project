@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../../../api/api";
+import {commonAPI} from "../../../api/api";
 
 const initialState = {
     errorPassMessage: "",
@@ -26,8 +26,14 @@ export const newPasswordReducer = (state: InitialStateType = initialState, actio
 };
 
 // action
-export const errorPassMessageAC = (errorPassMessage: string) => ({type: "newPassword/ERROR_MESSAGE", errorPassMessage} as const);
-export const setPasswordStatusAC = (passwordStatus: boolean) => ({type: "newPassword/SET_PASS_STATUS", passwordStatus} as const);
+export const errorPassMessageAC = (errorPassMessage: string) => ({
+    type: "newPassword/ERROR_MESSAGE",
+    errorPassMessage
+} as const);
+export const setPasswordStatusAC = (passwordStatus: boolean) => ({
+    type: "newPassword/SET_PASS_STATUS",
+    passwordStatus
+} as const);
 export const setServerStatusAC = (status: boolean) => ({type: "newPassword/SET_STATUS", status} as const);
 
 
@@ -37,7 +43,7 @@ export const newPasswordTC = (newPassword: string, token: string) => {
         dispatch(setServerStatusAC(true))
         console.log(newPassword)
         console.log(token)
-        authAPI.changePassword(newPassword, token)
+        commonAPI.changePassword(newPassword, token)
             .then((res) => {
                 dispatch(setServerStatusAC(false))
                 console.log("в then все ок")

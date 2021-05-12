@@ -7,7 +7,7 @@ const instance = axios.create({
 })
 // baseURL: 'http://localhost:7542/2.0/'
 
-export const authAPI = {
+export const commonAPI = {
     login(data: LoginParamsType) {
         return instance.post<loginResponseType>(('auth/login'), data)
     },
@@ -27,15 +27,19 @@ export const authAPI = {
     },
     changePassword(newPassword: string, token: string | undefined) {
         return instance.post<ResponseType>('auth/set-new-password', {newPassword, token})
-    }
+    },
+    //packs-cards
+
 }
+
+
+
 
 //types
 type ResponseType = {
     info: string
     error: ErrorType
 }
-
 type ErrorType = {
     error: string
     email: string
