@@ -33,26 +33,3 @@
 }
 
 
-.tableBody {
-    border: 1px solid lime;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.tableBody_name {
-    width: 25%;
-}
-
-.tableBody_cardsCount {
-    width: 10%;
-}
-
-.tableBody_updated {
-    width: 35%;
-}
-
-.tableBody_buttons {
-    width: 20%;
-}
