@@ -7,7 +7,7 @@ export const Header = () => {
     return (
         <div className={s.header}>
             <div className={s.item}>
-                <NavLink to={PATH.CHECK_IN}>registration</NavLink>
+                <NavLink to={PATH.REGISTRATION}>registration</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to={PATH.LOGIN}>login</NavLink>

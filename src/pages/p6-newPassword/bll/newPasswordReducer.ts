@@ -26,14 +26,8 @@ export const newPasswordReducer = (state: InitialStateType = initialState, actio
 };
 
 // action
-export const errorPassMessageAC = (errorPassMessage: string) => ({
-    type: "newPassword/ERROR_MESSAGE",
-    errorPassMessage
-} as const);
-export const setPasswordStatusAC = (passwordStatus: boolean) => ({
-    type: "newPassword/SET_PASS_STATUS",
-    passwordStatus
-} as const);
+export const errorPassMessageAC = (errorPassMessage: string) => ({type: "newPassword/ERROR_MESSAGE", errorPassMessage} as const);
+export const setPasswordStatusAC = (passwordStatus: boolean) => ({type: "newPassword/SET_PASS_STATUS", passwordStatus} as const);
 export const setServerStatusAC = (status: boolean) => ({type: "newPassword/SET_STATUS", status} as const);
 
 
