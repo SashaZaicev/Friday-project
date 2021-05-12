@@ -13,7 +13,7 @@ import SearchTable from "../../pages/p8-tableFilter/ui/SearchTable";
 export const PATH = {
     HOME_PAGE: '/',
     LOGIN: '/login',
-    NEW_PASSWORD: '/new-password',
+    NEW_PASSWORD: '/new-password/:token',
     CHECK_IN: '/check-in',
     PROFILE: '/profile',
     PASSWORD_RECOVERY: '/recover_password',
@@ -30,7 +30,7 @@ export const Routes = () => {
             <Switch>
                 <Route exact path={PATH.CHECK_IN} render={() => <CheckIn/>}/>
                 <Route exact path={['/', PATH.LOGIN]} render={() => <Login/>}/>
-                <Route exact path={PATH.NEW_PASSWORD} render={() => <NewPassword/>}/>
+                <Route path={PATH.NEW_PASSWORD} render={() => <NewPassword/>}/>
                 <Route exact path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route exact path={PATH.PASSWORD_RECOVERY} render={() => <RecoverPassword/>}/>
                 <Route exact path={PATH.PACKS} render={() => <Packs/>}/>

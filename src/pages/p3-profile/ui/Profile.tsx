@@ -13,6 +13,7 @@ export const Profile = () => {
 
 
     useEffect(() => {
+        if (isAuth) return
         dispatch(getAuthUserDataTC())
     }, [])
 

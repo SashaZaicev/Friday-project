@@ -1,0 +1,35 @@
+.table {
+    border: 1px solid yellow;
+    margin: 0 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.tableHeader {
+    border: 1px solid red;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tableHeader_packsName {
+    width: 25%;
+}
+
+.tableHeader_cardsCount {
+    width: 10%;
+}
+
+.tableHeader_updated {
+    width: 35%;
+}
+
+.tableHeader_buttonAdd {
+    width: 20%;
+}
+
+
