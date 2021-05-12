@@ -5,13 +5,15 @@ import {checkInReducer} from "../pages/p2-checkIn/bll/checkInReducer";
 import {profileReducer} from "../pages/p3-profile/bll/profileReducer";
 import {recoverPasswordReducer} from "../pages/p5-recoverPassword/bll/recoverPasswordReducer";
 import {newPasswordReducer} from "../pages/p6-newPassword/bll/newPasswordReducer";
+import {searchReducer} from "../pages/p8-tableFilter/bll/searchReducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
     registration: checkInReducer,
     profile: profileReducer,
     recoverPassword: recoverPasswordReducer,
-    newPassword: newPasswordReducer
+    newPassword: newPasswordReducer,
+    search: searchReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

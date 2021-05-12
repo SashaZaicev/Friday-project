@@ -8,6 +8,7 @@ import {RecoverPassword} from "../../pages/p5-recoverPassword/ui/RecoverPassword
 import {Error} from "../../pages/p4-404/ui/Error";
 import {Packs} from "../../pages/p3-packs/ui/Packs";
 import {Cards} from "../../pages/p3-cards/ui/Cards";
+import SearchTable from "../../pages/p8-tableFilter/ui/SearchTable";
 
 export const PATH = {
     HOME_PAGE: '/',
@@ -19,7 +20,8 @@ export const PATH = {
     TEST_COMPONENT: '/testComponent',
     PACKS: '/packs',
     CARDS: '/cards',
-    ERROR_404: '/404'
+    ERROR_404: '/404',
+    SEARCH_TABLE: '/search_table'
 }
 
 export const Routes = () => {
@@ -33,6 +35,7 @@ export const Routes = () => {
                 <Route exact path={PATH.PASSWORD_RECOVERY} render={() => <RecoverPassword/>}/>
                 <Route exact path={PATH.PACKS} render={() => <Packs/>}/>
                 <Route exact path={PATH.CARDS} render={() => <Cards/>}/>
+                <Route exact path={PATH.SEARCH_TABLE} render={() => <SearchTable/>}/>
                 {/*<Route exact path={PATH.TEST_COMPONENT} render={() => <Test/>}/>*/}
                 <Route path={PATH.ERROR_404} render={() => <Error/>}/>
                 <Redirect from={'*'} to={PATH.ERROR_404}/>
