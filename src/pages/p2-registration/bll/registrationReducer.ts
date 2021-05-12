@@ -1,5 +1,4 @@
 import {Dispatch} from "redux";
-import {ActionsTypes, CheckInUserType} from "./storeCheckIn";
 import {commonAPI} from "../../../api/api";
 import {ActionsTypes, RegistrationUserType} from "./storeRegistration";
 
