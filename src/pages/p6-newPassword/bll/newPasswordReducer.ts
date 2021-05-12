@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../../../api/api";
+import {commonAPI} from "../../../api/api";
 
 const initialState = {
     errorPassMessage: "",
@@ -35,7 +35,9 @@ export const setServerStatusAC = (status: boolean) => ({type: "newPassword/SET_S
 export const newPasswordTC = (newPassword: string, token: string) => {
     return (dispatch: ThunkDispatch) => {
         dispatch(setServerStatusAC(true))
-        authAPI.changePassword(newPassword, token)
+        console.log(newPassword)
+        console.log(token)
+        commonAPI.changePassword(newPassword, token)
             .then((res) => {
                 dispatch(setServerStatusAC(false))
                 console.log("в then все ок")

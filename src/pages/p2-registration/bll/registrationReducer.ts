@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
+import {ActionsTypes, CheckInUserType} from "./storeCheckIn";
+import {commonAPI} from "../../../api/api";
 import {ActionsTypes, RegistrationUserType} from "./storeRegistration";
-import {authAPI} from "../../../api/api";
 
 export const initialState = {
     id: '1',
@@ -90,7 +91,7 @@ export const actionsRegistrations = {
 
 export const createUserTC = (login: string, password: string) => {
     return (dispatch: Dispatch) => {
-        authAPI.signup(login, password)
+        commonAPI.signup(login, password)
             .then(res => {
                 dispatch(actionsRegistrations.setLoading(false))
                 dispatch(actionsRegistrations.setSuccess(true))

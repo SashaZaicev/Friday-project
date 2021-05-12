@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../../../api/api";
+import {commonAPI} from "../../../api/api";
 
 const initialState = {
     name: '',
@@ -33,7 +33,7 @@ const setAuthUserDataAC = (name: string, isAuth: boolean) => ({
 
 // thunk
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
-    authAPI.login(data)
+    commonAPI.login(data)
         .then((res) => {
                 dispatch(setNameAC(res.data.name))
                 dispatch(setIsLoggedInAC(true))
@@ -46,7 +46,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
 }
 
 export const logOutTC = () => (dispatch: Dispatch) => {
-    authAPI.logOut()
+    commonAPI.logOut()
         .then(() => {
                 dispatch(setIsLoggedInAC(false))
             }
@@ -60,7 +60,7 @@ export const logOutTC = () => (dispatch: Dispatch) => {
 }
 
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
-    authAPI.authMe()
+    commonAPI.authMe()
         .then(res => {
             dispatch(setAuthUserDataAC(res.data.name, true))
         })

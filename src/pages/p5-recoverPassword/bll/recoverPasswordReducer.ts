@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../../../api/api";
+import {commonAPI} from "../../../api/api";
 
 const initialState = {
     email: null as null || "",
@@ -43,7 +43,7 @@ export const recoverPasswordTC = (email: string, from: string, message: string) 
         dispatch(changeEmailAC(email))
         console.log(email)
         dispatch(setStatusAC(true))
-        authAPI.recoverPassword(email, from, message)
+        commonAPI.recoverPassword(email, from, message)
             .then((res) => {
                 dispatch(infoMessageAC(res.data.info))
                 console.log("then " + res.data.info)
