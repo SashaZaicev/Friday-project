@@ -38,7 +38,8 @@ export const Login = () => {
 
             <div>Password</div>
             <div>
-                <SuperInputText value={password}
+                <SuperInputText type={"password"}
+                                value={password}
                                 onChangeText={(value) => {
                                     setPassword(value)
                                 }}/>
@@ -66,7 +67,7 @@ export const Login = () => {
                     <NavLink to={PATH.PASSWORD_RECOVERY}>forgot password?</NavLink>
                 </div>
                 <div>
-                    <NavLink to={PATH.CHECK_IN}>registration</NavLink>
+                    <NavLink to={PATH.REGISTRATION}>registration</NavLink>
                 </div>
             </div>
 

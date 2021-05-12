@@ -52,7 +52,7 @@ const SInp: React.FC<SuperInputTextPropsType> = (
         <div className={s.content}>
             <div>
                 <input
-                    type={"text"}
+                    type={type}
                     onChange={onChangeCallback}
                     onKeyPress={onKeyPressCallback}
                     className={finalInputClassName}
