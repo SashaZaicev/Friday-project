@@ -36,6 +36,15 @@ export const commonAPI = {
     getPacks() {
         return instance.get<getPacksResponseType>('cards/pack')
 
+    },
+    postPack() {
+        return instance.post('cards/pack', {})
+    },
+    deletePack() {
+        return instance.delete(`cards/pack`)
+    },
+    updatePack() {
+        return instance.put('cards/pack', {})
     }
 }
 

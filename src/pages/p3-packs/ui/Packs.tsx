@@ -17,9 +17,13 @@ export const Packs = () => {
     useEffect(() => {
         if (isAuth) return
         dispatch(getAuthUserDataTC())
-        dispatch(getPacksTC())
     }, [])
 
+    useEffect(() => {
+        if (isAuth) {
+            dispatch(getPacksTC())
+        }
+    }, [])
 
     if (!isAuth) return <Redirect to={PATH.LOGIN}/>
 
