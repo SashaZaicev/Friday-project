@@ -39,7 +39,7 @@ export const newPasswordTC = (newPassword: string, token: string) => {
         console.log(token)
         commonAPI.changePassword(newPassword, token)
             .then((res) => {
-                dispatch(setServerStatusAC(false))
+                dispatch(setPasswordStatusAC(true))
                 console.log("в then все ок")
             })
             .catch((error) => {
@@ -47,7 +47,7 @@ export const newPasswordTC = (newPassword: string, token: string) => {
                 console.log("error " + error.message)
             })
             .finally(() => {
-                dispatch(setPasswordStatusAC(true))
+                dispatch(setServerStatusAC(false))
             })
     }
 }

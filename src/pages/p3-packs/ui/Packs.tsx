@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
-import {NavLink, Redirect} from 'react-router-dom'
 import s from './table.module.css'
+import { useHistory } from "react-router-dom";
 import {PATH} from "../../../components/routes/Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {getPacksTC} from "../bll/packsReducer";
@@ -8,11 +8,19 @@ import {getAuthUserDataTC} from "../../p1-login/bll/loginReducer";
 import {AppRootStateType} from "../../../app/store";
 import {Pack} from "./Pack/Pack";
 import {PackType} from "../../../api/api";
+import Preloader from "../../../components/preloader/Preloader";
 
 export const Packs = () => {
     const dispatch = useDispatch()
+    const history = useHistory();
+
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
+    const status = useSelector<AppRootStateType, boolean>(state => state.recoverPassword.status)
     const packs = useSelector<AppRootStateType, Array<PackType>>(state => state.packs.cardPacks)
+    const errorText = useSelector<AppRootStateType, string>(state => state.login.errorText)
+    const redirect = () => {
+        history.push(PATH.LOGIN)
+    }
 
     useEffect(() => {
         if (isAuth) return
@@ -20,12 +28,14 @@ export const Packs = () => {
         dispatch(getPacksTC())
     }, [])
 
-
-    if (!isAuth) return <Redirect to={PATH.LOGIN}/>
-
+    if (!isAuth) {
+        setTimeout(redirect, 2000)
+        return <div className={s.errorText}> {errorText} </div>
+    } else
 
     return (
         <>
+            { status ? <Preloader/> : "" } {/*// крутилка*/}
             <h5>Packs page</h5>
             table
             <div className={s.table}>

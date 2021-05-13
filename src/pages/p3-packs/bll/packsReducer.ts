@@ -1,12 +1,13 @@
 import {commonAPI, PackType} from "../../../api/api";
 import {Dispatch} from "redux";
-import {setIsLoggedInAC} from "../../p1-login/bll/loginReducer";
+import {setStatusAC, setStatusActionType} from "../../p5-recoverPassword/bll/recoverPasswordReducer";
 
 const initialState = {
     cardPacks: [] as Array<PackType>,
+//    isSuccess: true
 }
 
-export const packsReducer = (state: InitialStateType = initialState, action: setPacksACType): InitialStateType => {
+export const packsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case'packs/SET-PACKS':
             return {...state, cardPacks: action.packs}
@@ -22,6 +23,7 @@ export const setPacksAC = (packs: Array<PackType>) => ({type: 'packs/SET-PACKS',
 
 //thunk
 export const getPacksTC = () => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(true))
     commonAPI.getPacks()
         .then(res => {
             console.log(res);
@@ -30,10 +32,14 @@ export const getPacksTC = () => (dispatch: Dispatch) => {
         .catch(err => {
             console.log('some err in getPacks');
         })
+        .finally(() => {
+            dispatch(setStatusAC(false))
+        })
 }
 
 
 //types
 type InitialStateType = typeof initialState
+type ActionsTypes = setPacksACType | setStatusActionType
 type setPacksACType = ReturnType<typeof setPacksAC>
 

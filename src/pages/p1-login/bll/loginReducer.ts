@@ -1,10 +1,11 @@
 import {Dispatch} from "redux";
 import {commonAPI} from "../../../api/api";
+import {setStatusAC, setStatusActionType} from "../../p5-recoverPassword/bll/recoverPasswordReducer";
 
 const initialState = {
     name: '',
     isAuth: false,
-    errorText: ''
+    errorText: '',
 }
 
 export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -33,6 +34,7 @@ const setAuthUserDataAC = (name: string, isAuth: boolean) => ({
 
 // thunk
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setStatusAC(true))
     commonAPI.login(data)
         .then((res) => {
                 dispatch(setNameAC(res.data.name))
@@ -42,10 +44,15 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
         .catch(err => {
             dispatch(setIsLoggedInAC(false))
             dispatch(setErrorTextAC(err.response.data.error))
+            setTimeout(() => dispatch(setErrorTextAC('')), 3000)
+        })
+        .finally(() => {
+            dispatch(setStatusAC(false))
         })
 }
 
 export const logOutTC = () => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(true))
     commonAPI.logOut()
         .then(() => {
                 dispatch(setIsLoggedInAC(false))
@@ -57,9 +64,13 @@ export const logOutTC = () => (dispatch: Dispatch) => {
                 : (e.message + ', more details in the console')
             console.log(error)
         })
+        .finally(() => {
+            dispatch(setStatusAC(false))
+        })
 }
 
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(true))
     commonAPI.authMe()
         .then(res => {
             dispatch(setAuthUserDataAC(res.data.name, true))
@@ -68,6 +79,11 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
             const error = e.response
                 ? e.response.data.error
                 : (e.message + ', more details in the console')
+            dispatch(setErrorTextAC(error))
+            setTimeout(() => dispatch(setErrorTextAC('')), 3000)
+        })
+        .finally(() => {
+            dispatch(setStatusAC(false))
         })
 }
 
@@ -101,3 +117,4 @@ type ActionsType =
     | setErrorTextACType
     | setNameACType
     | setMeACType
+    | setStatusActionType
