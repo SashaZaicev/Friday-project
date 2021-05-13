@@ -8,6 +8,8 @@
 
 .tableBody_name {
     width: 25%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .tableBody_cardsCount {
