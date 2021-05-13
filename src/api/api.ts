@@ -41,14 +41,14 @@ export const commonAPI = {
             + (sortProducts ? `sortProducts=${sortProducts}&` : ''))
 
     },
-    postPack() {
-        return instance.post('cards/pack', {})
+    addPack() {
+        return instance.post(`cards/pack`, {cardsPack: {name: 'new test pack'}})
     },
-    deletePack() {
-        return instance.delete(`cards/pack`)
+    deletePack(packId: string) {
+        return instance.delete(`cards/pack?id=${packId}`)
     },
-    updatePack() {
-        return instance.put('cards/pack', {})
+    updatePack(packId: string, name?: string) {
+        return instance.put(`cards/pack`, {cardsPack: {_id: packId, name: 'test pack update'}})
     }
 }
 

@@ -1,8 +1,8 @@
 import {commonAPI, PackType} from "../../../api/api";
 import {Dispatch} from "redux";
-import {setIsLoggedInAC} from "../../p1-login/bll/loginReducer";
 import {AppRootStateType} from "../../../app/store";
 import {actionsSearch} from "../../p8-tableFilter/bll/searchReducer";
+import {ThunkDispatch} from "redux-thunk";
 
 export const initialState = {
     cardPacks: [] as Array<PackType>,
@@ -20,12 +20,12 @@ export const packsReducer = (state: InitialStateType = initialState, action: set
 
 //AC
 export const setPacksAC = (packs: Array<PackType>) => ({type: 'packs/SET-PACKS', packs} as const)
-type GetStore=()=>AppRootStateType
+type GetStore = () => AppRootStateType
 
 //thunk
-export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch: Dispatch, getStore:GetStore) => {
+export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch: Dispatch, getStore: GetStore) => {
     const {min, max, searchName, page, pageCount, sortProducts} = getStore().search.tableProducts.settingsSearch
-    commonAPI.getPacks( min, max, searchName,newPage || page, newPageCount || pageCount, sortProducts )
+    commonAPI.getPacks(min, max, searchName, newPage || page, newPageCount || pageCount, sortProducts)
         .then(res => {
             console.log(res);
             dispatch(setPacksAC(res.data.cardPacks))
@@ -33,6 +33,46 @@ export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch
         })
         .catch(err => {
             console.log('some err in getPacks');
+        })
+}
+
+export const addPackTC = () => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
+    commonAPI.addPack()
+        .then(() => {
+            dispatch(getPacksTC())
+        })
+        .catch(e => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            console.log(error);
+        })
+}
+export const deletePackTC = (packId: string) => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
+    commonAPI.deletePack(packId)
+        .then(() => {
+            dispatch(getPacksTC())
+        })
+        .catch(e => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            console.log(error);
+
+        })
+}
+
+export const updatePackTC = (packId: string, name?: string) => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
+    commonAPI.updatePack(packId, name)
+        .then(() => {
+            dispatch(getPacksTC())
+        })
+        .catch(e => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            console.log(error);
+
         })
 }
 
