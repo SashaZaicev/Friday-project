@@ -6,14 +6,15 @@ import s from './pack.module.css'
 
 type PackPropsType = {
     pack: PackType
+    packDate: string // для нового типа даты
 }
 
-export const Pack = ({pack}: PackPropsType) => {
+export const Pack = ({pack,packDate}: PackPropsType) => {
     return <>
         <div className={s.tableBody}>
             <div className={s.tableBody_name}>{pack.name}</div>
             <div className={s.tableBody_cardsCount}>{pack.cardsCount}</div>
-            <div className={s.tableBody_updated}>{pack.updated}</div>
+            <div className={s.tableBody_updated}>{packDate}</div>
             <div className={s.tableBody_buttons}>
                 <button>del</button>
                 <button>update</button>

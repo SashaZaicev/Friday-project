@@ -5,7 +5,7 @@ import {Login} from "../../pages/p1-login/ui/Login";
 import {NewPassword} from "../../pages/p6-newPassword/ui/NewPassword";
 import {Profile} from "../../pages/p3-profile/ui/Profile";
 import {RecoverPassword} from "../../pages/p5-recoverPassword/ui/RecoverPassword";
-import {Error} from "../../pages/p4-404/ui/Error";
+import {Error404} from "../../pages/p4-404/ui/Error404";
 import {Packs} from "../../pages/p3-packs/ui/Packs";
 import {Cards} from "../../pages/p3-cards/ui/Cards";
 import SearchTable from "../../pages/p8-tableFilter/ui/SearchTable";
@@ -38,7 +38,7 @@ export const Routes = () => {
                 <Route exact path={PATH.CARDS} render={() => <Cards/>}/>
                 <Route exact path={PATH.SEARCH_TABLE} render={() => <SearchTable/>}/>
                 {/*<Route exact path={PATH.TEST_COMPONENT} render={() => <Test/>}/>*/}
-                <Route path={PATH.ERROR_404} render={() => <Error/>}/>
+                <Route path={PATH.ERROR_404} render={() => <Error404/>}/>
                 <Redirect from={'*'} to={PATH.ERROR_404}/>
             </Switch>
         </div>

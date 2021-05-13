@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../app/store";
 import MultiRangeSlider from "./MultiRangeSlider/MultiRangeSlider";
 import Pagination from "./Pagination/Pagination";
+import {getPacksTC} from "../../p3-packs/bll/packsReducer";
 
 
 const SearchTable = () => {
@@ -14,18 +15,11 @@ const SearchTable = () => {
     const tableSearch = (searchName: string) => {
         dispatch(actionsSearch.setSearchName(searchName))
     }
-    const getResult = () => {
-        dispatch(getSearch())
-    }
-    const getPage = (newPage: number, newPageCount: number) => {
-        dispatch(getSearch(newPage, newPageCount))
-    };
 
-    const currentItems = tableProducts.items.map(el => <tr key={el.id}>
-        <td>{el.itemName}</td>
-        <td>{el.price}</td>
-        <td></td>
-    </tr>)
+    const getResult = () => {
+        dispatch(getPacksTC())
+    }
+
     return (
         <div className={s.searchTable}>
             <div>
@@ -35,30 +29,13 @@ const SearchTable = () => {
                        placeholder={'Введите значение для поиска'}
                 />
             </div>
-            <div><MultiRangeSlider/></div>
+            <div style={{
+                width: "50%"
+            }}><MultiRangeSlider/></div>
             <div>
                 <button onClick={getResult}>Поиск (Search)</button>
             </div>
-            <div className={s.tableBlock}>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>itemName</th>
-                        <th>price</th>
-                        <th>
-                            <button>КНОПОЧКА-ПУСТЫШКА</button>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {currentItems}
-                    </tbody>
-                    <Pagination page={page} pageCount={pageCount} productTotalCount={productTotalCount}getPage={getPage}/>
-                </table>
-            </div>
-            {/*<div>{tableProducts.loading ? 'LOADING...' : 'FALSE'}*/}
-            {/*{tableProducts.items.filter(el=>(el.itemName===tableProducts.settingsSearch.searchName))*/}
-            {/*    .map((item)=>(<div>{item.itemName}</div>))}</div>*/}
+
         </div>
     );
 };

@@ -24,7 +24,7 @@ const MultiRangeSlider: React.FC = () => {
     return (
         <Range
             values={values}
-            step={100}
+            step={1}
             min={minPrice}
             max={maxPrice}
             onChange={values => setGlobalValues(values)}
@@ -36,8 +36,8 @@ const MultiRangeSlider: React.FC = () => {
                         ...props.style,
                         height: '36px',
                         display: 'flex',
-                        width: '50%',
-                        margin: '30px',
+                        width: '90%',
+                        margin: '5%',
                     }}
                 >
                     <div

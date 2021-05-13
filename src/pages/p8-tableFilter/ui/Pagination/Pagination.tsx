@@ -1,17 +1,23 @@
 import React, {CSSProperties, ReactNode} from 'react';
+import {isNumber} from "util";
 
 interface IPaginationProps {
-    page: number; pageCount: number; productTotalCount: number;
+    page: number;
+    pageCount: number;
+    productTotalCount: number;
     getPage: (newPage: number, newPageCount: number) => void;
 
-    title?: ReactNode; paginationStyle?: CSSProperties; buttonStyle?: CSSProperties; selectStyle?: CSSProperties;
+    title?: ReactNode;
+    paginationStyle?: CSSProperties;
+    buttonStyle?: CSSProperties;
+    selectStyle?: CSSProperties;
 }
 
 const Pagination: React.FC<IPaginationProps> = (
     {
         page, pageCount, productTotalCount, getPage,
 
-        title = 'Pagination', paginationStyle,
+        title = 'Pagination ', paginationStyle,
         buttonStyle, selectStyle
     }
 ) => {
@@ -28,7 +34,6 @@ const Pagination: React.FC<IPaginationProps> = (
         </button>
     ));
 
-    // 1 ... 4 5 (6) 7 8 ... 11
     if ((page + 4) < lastPage) {
         pages[page + 2] = (
             <span key={page + 3} style={buttonStyle}>
@@ -45,20 +50,58 @@ const Pagination: React.FC<IPaginationProps> = (
         );
         pages = pages.filter((p, i) => i < 2 || i > page - 4);
     }
+    const prevPage = () => {
+        getPage(page - 1, pageCount);
+        // if ((currentPage - 1) % pageNumberLimit == 0) {
+        //     setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+        //     setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+        // }
+    }
+    const nextPage = () => {
+        getPage(page + 1, pageCount);
+        // if (currentPage + 1 > maxPageNumberLimit) {
+        //     setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+        //     setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+        // }
+    }
+
 
     return (
-        <div style={{margin: '0 10px', minHeight: '50px', justifyContent: 'flex-end',
-            alignItems: 'center', display: 'flex', ...paginationStyle}}>
-            {title}
+        <div style={{
+            margin: '0 10px', minHeight: '50px', justifyContent: 'center',
+            alignItems: 'center', display: 'flex', ...paginationStyle, flexDirection: 'column'
+        }}>
+            <div>{title} </div>
 
-            <select value={pageCount} onChange={e => getPage(page, Number(e.currentTarget.value))} style={selectStyle}>
+            <div style={{
+                display: 'flex'
+            }}><select value={pageCount} onChange={e => getPage(page, Number(e.currentTarget.value))}
+                       style={{
+                           ...selectStyle,
+                           marginRight: '5px'
+                       }}>
                 <option value={4}>4</option>
                 <option value={7}>7</option>
                 <option value={10}>10</option>
                 <option value={20}>20</option>
                 <option value={50}>50</option>
             </select>
-            {pages}
+                <div style={{
+                    marginLeft: '5px',
+                    marginRight: '5px',
+                    display: 'flex'
+                }}>
+                    <button onClick={prevPage}>PREV</button>
+                </div>
+                {pages}
+                <div style={{
+                    marginLeft: '5px',
+                    marginRight: '5px',
+                    display: 'flex'
+                }}>
+                    <button onClick={nextPage}>NEXT</button>
+                </div>
+            </div>
         </div>
     );
 };

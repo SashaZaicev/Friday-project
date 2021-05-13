@@ -15,8 +15,7 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     recoverPassword: recoverPasswordReducer,
     newPassword: newPasswordReducer,
-    search: searchReducer
-    newPassword: newPasswordReducer,
+    search: searchReducer,
     packs: packsReducer
 })
 
