@@ -7,12 +7,12 @@ import {Header} from "../components/header/Header";
 function App() {
     return (
         <div className="App">
-            <>
+
                 <HashRouter>
                     <Header/>
                     <Routes/>
                 </HashRouter>
-            </>
+
 
         </div>
     );

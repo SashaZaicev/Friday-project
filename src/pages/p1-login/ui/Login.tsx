@@ -8,6 +8,7 @@ import {AppRootStateType} from '../../../app/store';
 import {loginTC} from "../bll/loginReducer";
 import {NavLink, Redirect} from "react-router-dom";
 import {PATH} from "../../../components/routes/Routes";
+import Preloader from "../../../components/preloader/Preloader";
 
 export const Login = () => {
     const dispatch = useDispatch()
@@ -18,6 +19,7 @@ export const Login = () => {
 
     const error = useSelector<AppRootStateType, string>(state => state.login.errorText)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
+    const status = useSelector<AppRootStateType, boolean>(state => state.recoverPassword.status)
 
     if (isLoggedIn) {
         return <Redirect to={PATH.PROFILE}/>
@@ -26,14 +28,15 @@ export const Login = () => {
 
     return (
         <div className={s.flexMainContainer}>
-            <h3>Login Page</h3>
+            <div className={s.preloader}>{ status ? <Preloader/> : "" }</div> {/*// крутилка*/}
+            <h2>Login Page</h2>
+                <div className={s.answerServer}>{error && <span className={s.error}>{error}</span>}</div>
             <div>Email</div>
             <div>
                 <SuperInputText onChangeText={(value) => {
                     setEmail(value)
                 }}
-                                value={email}
-                                error={error}/>
+                                value={email}/>
             </div>
 
             <div>Password</div>

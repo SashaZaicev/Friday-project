@@ -3,12 +3,14 @@ import {Dispatch} from "redux";
 import {AppRootStateType} from "../../../app/store";
 import {actionsSearch} from "../../p8-tableFilter/bll/searchReducer";
 import {ThunkDispatch} from "redux-thunk";
+import {setStatusAC, setStatusActionType} from "../../p5-recoverPassword/bll/recoverPasswordReducer";
 
 export const initialState = {
     cardPacks: [] as Array<PackType>,
+//    isSuccess: true
 }
 
-export const packsReducer = (state: InitialStateType = initialState, action: setPacksACType): InitialStateType => {
+export const packsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case'packs/SET-PACKS':
             return {...state, cardPacks: action.packs}
@@ -25,6 +27,7 @@ type GetStore = () => AppRootStateType
 //thunk
 export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch: Dispatch, getStore: GetStore) => {
     const {min, max, searchName, page, pageCount, sortProducts} = getStore().search.tableProducts.settingsSearch
+    dispatch(setStatusAC(true))
     commonAPI.getPacks(min, max, searchName, newPage || page, newPageCount || pageCount, sortProducts)
         .then(res => {
             console.log(res);
@@ -33,6 +36,9 @@ export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch
         })
         .catch(err => {
             console.log('some err in getPacks');
+        })
+        .finally(() => {
+            dispatch(setStatusAC(false))
         })
 }
 
@@ -79,5 +85,6 @@ export const updatePackTC = (packId: string, name?: string) => (dispatch: ThunkD
 
 //types
 type InitialStateType = typeof initialState
+type ActionsTypes = setPacksACType | setStatusActionType
 type setPacksACType = ReturnType<typeof setPacksAC>
 

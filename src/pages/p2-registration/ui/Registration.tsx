@@ -69,16 +69,16 @@ export const Registration: React.FC = () => {
     const errInputPas2 = (password2 === '' && stateRegistrationError) ? 'Обязательное поле' : '';
     return (
         <div className={s.checkInBlock}>
-            <h2 className={s.checkInTitle}>Registration</h2>
-            {stateLoading
+            <div className={s.preloader}> {stateLoading
                 ? <Preloader/>
-                : (stateRegistrationError || errorServer)
-                    ? <div style={{color: 'red'}}> {errorServer ? errorServer : "УПС ошибочка..."}</div>
-                    : stateRegistrationIsSuccess
-                        ? <div style={{color: 'lime'}}>Success!</div>
-                        : <div><br/></div>
-            }
-
+                : ""
+            } </div>
+            <h2 className={s.checkInTitle}>Registration</h2>
+            {(stateRegistrationError || errorServer)
+                ? <div style={{color: 'red'}}> {errorServer ? errorServer : "УПС ошибочка..."}</div>
+                : stateRegistrationIsSuccess
+                    ? <div style={{color: 'lime'}}>Success!</div>
+                    : <div><br/></div>}
             <label>Email:
                 <div className={s.help}>Example: Alex@company.com</div>
                 <SInp

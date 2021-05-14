@@ -27,18 +27,17 @@ export const RecoverPassword = () => {
 
     return (
         <div className={s.content}>
-            { status ? <Preloader/> : "" } {/*// крутилка*/}
-            <h3> Enter your email </h3>
+            <div className={s.preloader}>{ status ? <Preloader/> : "" }</div> {/*// крутилка*/}
+            <h2> Enter your email </h2>
             <div>
+                <div className={s.answerServer}> {error && <span className={s.error}>{error}</span>}
+                    {info && <span>{info}</span>} </div>
                 <SuperInputText type={'text'}
                                 value={email}
-                                info={info}
-                                error={error}
                                 onChange={onChange}/>
             </div>
             <div>
                 <SuperButton name={"Recover password"}
-                             error={error}
                              onClick={() => recoverPassword(email, from, message)}
                              disabled={status}/>
             </div>
