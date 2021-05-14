@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react'
-import {Redirect} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import s from './table.module.css'
-import { useHistory } from "react-router-dom";
 import {PATH} from "../../../components/routes/Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {addPackTC, getPacksTC} from "../bll/packsReducer";
@@ -46,12 +45,12 @@ export const Packs = () => {
         return <Pack key={p._id} pack={p} packDate={date}/>
     })
 
-    if (!isAuth) return <Redirect to={PATH.LOGIN}/>
+    // if (!isAuth) return <Redirect to={PATH.LOGIN}/>
 
-    // if (!isAuth) {
-    //     setTimeout(redirect, 2000)
-    //     return <div className={s.errorText}> {errorText} </div>
-    // } else
+    if (!isAuth) {
+        setTimeout(redirect, 2000)
+        return <div className={s.errorText}> {errorText} </div>
+    }
 
     const getPage = (newPage: number, newPageCount: number) => {
         dispatch(actionsSearch.setPageCount(newPage, newPageCount))
@@ -65,7 +64,7 @@ export const Packs = () => {
 
     return (
         <>
-            { status ? <Preloader/> : "" } {/*// крутилка*/}
+            {status ? <Preloader/> : ""} {/*// крутилка*/}
             <h5>Packs page</h5>
             <SearchTable/>
             table
