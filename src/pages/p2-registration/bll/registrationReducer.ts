@@ -1,7 +1,6 @@
 import {Dispatch} from "redux";
-import {userAPI} from "../api/api";
-import {ActionsTypes, CheckInUserType} from "./storeCheckIn";
-import {infoMessageAC} from "../../p5-recoverPassword/bll/recoverPasswordReducer";
+import {commonAPI} from "../../../api/api";
+import {ActionsTypes, RegistrationUserType} from "./storeRegistration";
 
 export const initialState = {
     id: '1',
@@ -23,7 +22,7 @@ const SET_SUCCESS = "SET_SUCCESS"
 const SET_LOADING = "SET_LOADING"
 const SET_REMEMBER_ME = "SET_REMEMBER_ME"
 
-export const checkInReducer = (state: CheckInUserType = initialState, action: ActionsTypes) => {
+export const registrationReducer = (state: RegistrationUserType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case  SET_LOGIN: {
             return {
@@ -78,7 +77,7 @@ export const checkInReducer = (state: CheckInUserType = initialState, action: Ac
     }
 };
 
-export const actionsCheckIn = {
+export const actionsRegistrations = {
     setLogin: (login: string) => ({type: SET_LOGIN, login}) as const,
     postPassword: (password: string) => ({type: 'SET_PASSWORD', password}) as const,
     postRepeatPassword: (repeatPassword: string) => ({type: 'SET_REPEAT_PASSWORD', repeatPassword}) as const,
@@ -91,17 +90,26 @@ export const actionsCheckIn = {
 
 export const createUserTC = (login: string, password: string) => {
     return (dispatch: Dispatch) => {
-        userAPI.signup(login, password)
+        commonAPI.signup(login, password)
             .then(res => {
-                dispatch(actionsCheckIn.setLoading(false))
-                dispatch(actionsCheckIn.setSuccess(true))
-                setTimeout(() => dispatch(actionsCheckIn.setSuccess(false)), 3000)
+                dispatch(actionsRegistrations.setLoading(false))
+                dispatch(actionsRegistrations.setSuccess(true))
+                setTimeout(() => dispatch(actionsRegistrations.setSuccess(false)), 3000)
             })
-        .catch(er => {
+            .catch(er => {
+                console.log(er)
+
+                dispatch(actionsRegistrations.setErrServ(er.response.data.error))
+                setTimeout(() => dispatch(actionsRegistrations.setErrServ('')), 3000)
+            })
+            .finally(() => {
+                dispatch(actionsRegistrations.setLoading(false))
+            })
+        /*.catch(er => {
             console.log(er)
-            dispatch(actionsCheckIn.setLoading(false))
-            dispatch(actionsCheckIn.setErrServ(er.response.data.error))
-            setTimeout(() => dispatch(actionsCheckIn.setErrServ('')), 3000)
-        })
+            dispatch(actionsRegistrations.setLoading(false))
+            dispatch(actionsRegistrations.setErrServ(er.response.data.error))
+            setTimeout(() => dispatch(actionsRegistrations.setErrServ('')), 3000)
+        })*/
     }
 }

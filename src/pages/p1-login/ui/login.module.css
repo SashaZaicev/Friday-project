@@ -10,3 +10,18 @@
     justify-content: space-around;
     width: 270px;
 }
+
+.error {
+    padding: 3px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: red;
+}
+
+.preloader {
+    height: 100px
+}
+
+.answerServer {
+    height: 20px
+}

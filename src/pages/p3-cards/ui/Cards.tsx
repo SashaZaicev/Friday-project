@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Error = () => {
+export const Cards = () => {
     return (
         <>
-            Error
+            Cards
         </>
     )
 }
