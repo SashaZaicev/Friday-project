@@ -33,9 +33,22 @@ export const commonAPI = {
         return instance.post('auth/set-new-password', {password: newPassword, resetPasswordToken: token})
     },
     //packs-cards
-    getPacks() {
-        return instance.get<getPacksResponseType>('cards/pack')
+    getPacks(min: number, max: number, searchName: string, page?: number, pageCount?: number, sortProducts?: string) {
+        return instance.get<getPacksResponseType>(`cards/pack?`
+            + (max ? `min=${min}&max=${max}&` : '')
+            + (searchName.length > 0 ? `name=${searchName}&` : '')
+            + (page ? `page=${page}&pageCount=${pageCount}&` : '')
+            + (sortProducts ? `sortProducts=${sortProducts}&` : ''))
 
+    },
+    addPack() {
+        return instance.post(`cards/pack`, {cardsPack: {name: 'new test pack'}})
+    },
+    deletePack(packId: string) {
+        return instance.delete(`cards/pack?id=${packId}`)
+    },
+    updatePack(packId: string, name?: string) {
+        return instance.put(`cards/pack`, {cardsPack: {_id: packId, name: 'test pack update'}})
     }
 }
 

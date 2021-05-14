@@ -5,6 +5,7 @@ import {registrationReducer} from "../pages/p2-registration/bll/registrationRedu
 import {profileReducer} from "../pages/p3-profile/bll/profileReducer";
 import {recoverPasswordReducer} from "../pages/p5-recoverPassword/bll/recoverPasswordReducer";
 import {newPasswordReducer} from "../pages/p6-newPassword/bll/newPasswordReducer";
+import {searchReducer} from "../pages/p8-tableFilter/bll/searchReducer";
 import {packsReducer} from "../pages/p3-packs/bll/packsReducer";
 
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     recoverPassword: recoverPasswordReducer,
     newPassword: newPasswordReducer,
+    search: searchReducer,
     packs: packsReducer
 })
 
