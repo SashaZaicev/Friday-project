@@ -30,7 +30,6 @@ export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch
     dispatch(setStatusAC(true))
     commonAPI.getPacks(min, max, searchName, newPage || page, newPageCount || pageCount, sortProducts)
         .then(res => {
-            console.log(res);
             dispatch(setPacksAC(res.data.cardPacks))
             dispatch(actionsSearch.setProductTotalCount(res.data.cardPacksTotalCount))
         })

@@ -36,7 +36,7 @@ export const commonAPI = {
     getPacks(min: number, max: number, searchName: string, page?: number, pageCount?: number, sortProducts?: string) {
         return instance.get<getPacksResponseType>(`cards/pack?`
             + (max ? `min=${min}&max=${max}&` : '')
-            + (searchName.length > 0 ? `name=${searchName}&` : '')
+            + (searchName.length > 0 ? `packName=${searchName}&` : '')
             + (page ? `page=${page}&pageCount=${pageCount}&` : '')
             + (sortProducts ? `sortProducts=${sortProducts}&` : ''))
 
