@@ -17,7 +17,11 @@
 }
 
 .tableBody_updated {
-    width: 35%;
+    width: 10%;
+}
+
+.tableBody_user {
+    width: 25%;
 }
 
 .tableBody_buttons {

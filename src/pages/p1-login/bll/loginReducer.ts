@@ -41,7 +41,6 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
     dispatch(setStatusAC(true))
     commonAPI.login(data)
         .then((res) => {
-            debugger
                 dispatch(setNameAC(res.data.name))
                 dispatch(setAvatarAC(res.data.avatar))
                 dispatch(setIsLoggedInAC(true))

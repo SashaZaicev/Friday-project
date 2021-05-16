@@ -21,7 +21,6 @@ const SortModule: React.FC<SortTypeProps> = ({title, arrayData}) => {
     }
     const titleStyle = {
         marginRight: '5px',
-        marginLeft: '5px'
     }
     const sortItem = (x: number) => {
         setBtnArrow(x)
@@ -34,7 +33,6 @@ const SortModule: React.FC<SortTypeProps> = ({title, arrayData}) => {
     return (
         <div style={{
             display: 'flex',
-            justifyContent: 'center',
             alignItems: 'center'
         }}>
             <div style={titleStyle}>{title}</div>

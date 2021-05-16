@@ -8,10 +8,6 @@ const instance = axios.create({
 // baseURL: 'https://neko-back.herokuapp.com/2.0/'
 //http://localhost:7542/2.0/
 
-const instance1 = axios.create({  // @@@ необходимо для проверки восстановления пароля @@@
-    withCredentials: true,
-    baseURL: 'https://neko-back.herokuapp.com/2.0/',
-})
 export const commonAPI = {
     login(data: LoginParamsType) {
         return instance.post<loginResponseType>(('auth/login'), data)
@@ -28,7 +24,7 @@ export const commonAPI = {
         })
     },
     recoverPassword(email: string, from: string, message: string) {
-        return instance1.post<ResponseType>('auth/forgot', {email, from, message});
+        return instance.post<ResponseType>('auth/forgot', {email, from, message});
     },
     changePassword(newPassword: string, token: string | undefined) {
         return instance.post('auth/set-new-password', {password: newPassword, resetPasswordToken: token})

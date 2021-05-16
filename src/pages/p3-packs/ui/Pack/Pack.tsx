@@ -24,6 +24,7 @@ export const Pack = ({pack, packDate}: PackPropsType) => {
             <div className={s.tableBody_name}>{pack.name}</div>
             <div className={s.tableBody_cardsCount}>{pack.cardsCount}</div>
             <div className={s.tableBody_updated}>{packDate}</div>
+            <div className={s.tableBody_user}>{pack.user_name}</div>
             <div className={s.tableBody_buttons}>
                 <button onClick={onBtnDeletePack}>del</button>
                 <button onClick={onBtnUpdatePack}>update</button>

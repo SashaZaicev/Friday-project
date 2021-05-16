@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import {Redirect} from 'react-router-dom'
 import s from './table.module.css'
 import {PATH} from "../../../components/routes/Routes";
 import {useDispatch, useSelector} from "react-redux";
@@ -15,16 +15,15 @@ import SortModule from "../../p8-tableFilter/ui/SortModule/SortModule";
 import Preloader from "../../../components/preloader/Preloader";
 
 export const Packs = () => {
-    const dispatch = useDispatch()
-    const history = useHistory();
+    const dispatch = useDispatch() // удалила useHistory
 
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
     const status = useSelector<AppRootStateType, boolean>(state => state.recoverPassword.status)
     const packs = useSelector<AppRootStateType, Array<PackType>>(state => state.packs.cardPacks)
     const errorText = useSelector<AppRootStateType, string>(state => state.login.errorText)
-    const redirect = () => {
-        history.push(PATH.LOGIN)
-    }
+    let [redirect, setRedirect] = useState<boolean>(false)
+    let [wait, setWait] = useState<boolean>(true)
+
     const {
         searchName,
         page,
@@ -35,22 +34,22 @@ export const Packs = () => {
     useEffect(() => {
         if (isAuth) {
             dispatch(getPacksTC())
+            setWait(false)
             return
+        } else {
+            setTimeout(() => setRedirect(true), 2000);
         }
         dispatch(getAuthUserDataTC())
-    }, [dispatch])
+    }, [isAuth, dispatch])
+
+    if (redirect) return <Redirect to={PATH.LOGIN}/>
+    if (wait) return <div className={s.errorText}> {errorText} </div>
 
     const newPacks = packs.map((p) => {
         const date = (new Date(p.updated)).toLocaleDateString() //возможность менять тип даты
         return <Pack key={p._id} pack={p} packDate={date}/>
     })
 
-    // if (!isAuth) return <Redirect to={PATH.LOGIN}/>
-
-    if (!isAuth) {
-        setTimeout(redirect, 2000)
-        return <div className={s.errorText}> {errorText} </div>
-    }
 
     const getPage = (newPage: number, newPageCount: number) => {
         dispatch(actionsSearch.setPageCount(newPage, newPageCount))
@@ -64,7 +63,7 @@ export const Packs = () => {
 
     return (
         <>
-            {status ? <Preloader/> : ""} {/*// крутилка*/}
+            <div className={s.preloader}>{ status ? <Preloader/> : "" }</div> {/*// крутилка*/}
             <h5>Packs page</h5>
             <SearchTable/>
             table
@@ -73,6 +72,7 @@ export const Packs = () => {
                     <div className={s.tableHeader_packsName}>Name</div>
                     <div className={s.tableHeader_cardsCount}><SortModule arrayData={packs} title={'CardsCount'}/></div>
                     <div className={s.tableHeader_updated}>updated</div>
+                    <div className={s.tableHeader_user}>User Name</div>
                     <div className={s.tableHeader_buttonAdd}>
                         <button onClick={onBtnAddPack}>add</button>
                     </div>
