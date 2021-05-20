@@ -116,7 +116,7 @@ export const Registration: React.FC = () => {
                       disabled={!!stateLoading}
 
                 />
-                <SCBox onChange={setRememberMeChange}/>
+                <SCBox onChange={setRememberMeChange} checked={rememberMe}/>
             </div>
             <NavLink to={PATH.LOGIN}>Sign In</NavLink>
         </div>

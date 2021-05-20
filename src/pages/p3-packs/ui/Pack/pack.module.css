@@ -26,7 +26,8 @@
 }
 
 .tableBody_buttons {
-    width: 20%;
     display: flex;
+    width: 20%;
+    /*justify-content: space-around;*/
     justify-content: space-between;
 }

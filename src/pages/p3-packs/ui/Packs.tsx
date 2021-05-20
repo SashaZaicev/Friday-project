@@ -17,7 +17,7 @@ import ModalUp from "../../../components/Modals/ModalUp/ModalUp";
 import ModalUpdateContainer from "../../../components/Modals/ModalUpdate/ModalUpdateContainer";
 
 export const Packs = () => {
-    const dispatch = useDispatch() // удалила useHistory
+    const dispatch = useDispatch()
 
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
     const status = useSelector<AppRootStateType, boolean>(state => state.recoverPassword.status)
@@ -28,7 +28,6 @@ export const Packs = () => {
     let [name, setName] = useState<string>('')
 
     const {
-        searchName,
         page,
         pageCount,
         productTotalCount
@@ -67,7 +66,8 @@ export const Packs = () => {
 
     return (
         <>
-            <div className={s.preloader}>{ status ? <Preloader/> : "" }</div> {/*// крутилка*/}
+            <div className={s.preloader}>{status ? <Preloader/> : ""}</div>
+            {/*// крутилка*/}
             <h5>Packs page</h5>
             <SearchTable/>
             table

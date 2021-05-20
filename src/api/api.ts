@@ -29,7 +29,9 @@ export const commonAPI = {
     changePassword(newPassword: string, token: string | undefined) {
         return instance.post('auth/set-new-password', {password: newPassword, resetPasswordToken: token})
     },
-    //packs-cards
+
+    //packs
+
     getPacks(min: number, max: number, searchName: string, page?: number, pageCount?: number, sortProducts?: string) {
         return instance.get<getPacksResponseType>(`cards/pack?`
             + (max ? `min=${min}&max=${max}&` : '')
@@ -46,6 +48,39 @@ export const commonAPI = {
     },
     updatePack(packId: string, name?: string) {
         return instance.put(`cards/pack`, {cardsPack: {_id: packId, name: name || 'no name'}})
+    },
+
+    //cards
+
+    getCards(packId: string, question?: string, answer?: string, min?: string, max?: string, page?: number, pageCount?: number) {
+        return instance.get<GetCardsResponseType>(`cards/card`, {
+            params: {
+                cardsPack_id: packId,
+                cardQuestion: question,
+                cardAnswer: answer,
+                min,
+                max,
+                page,
+                pageCount
+            }
+        })
+    },
+    addCard(id: string) {
+        return instance.post(`cards/card`, {card: {cardsPack_id: id, question: 'My question'}})
+    },
+    deleteCard(cardId: string) {
+        return instance.delete(`cards/card?id=${cardId}`)
+    },
+    updateCard(cardId: string, question: string, answer: string, grade: number, shots: number, rating: number, comments: string) {
+        return instance.put(`cards/card`, {
+            card: {
+                _id: cardId, question: 'My question update', answer, grade, shots,
+                rating, comments
+            }
+        })
+    },
+    updateGrade(grade: number, card_id: string) {
+        return instance.put(`cards/grade`, {grade, card_id})
     }
 }
 
@@ -87,4 +122,28 @@ export type PackType = {
     user_name: string
     __v: number
     _id: string
+}
+
+export type GetCardsResponseType = {
+    cards: Array<CardType>
+    cardsTotalCount: number
+    maxGrade: number
+    minGrade: number
+    page: number
+    pageCount: number
+    packUserId: string
+}
+export type CardType = {
+    _id: string
+    question: string
+    answer: string
+    cardsPack_id: string
+    grade: number
+    rating: number
+    shots: number
+    type: string
+    user_id: string
+    created: Date
+    updated: Date
+    comments: string
 }
