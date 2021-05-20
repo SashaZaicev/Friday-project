@@ -84,14 +84,24 @@ export const deleteCardTC = (packId: string, cardId: string) => (dispatch: Thunk
 
         })
 }
+export const updateCardTC = (packId: string, cardId: string) => (dispatch: ThunkDispatch<AppRootStateType, void, ActionsType>) => {
+    debugger
+    commonAPI.updateCard(cardId)
+        .then(() => {
+            dispatch(getCardTC(packId))
+        })
+        .catch(e => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            console.log(error);
+
+        })
+}
 
 
 //types
 export type initialStateType = typeof initialState
-//объединение типов actionов:
 export type ActionsType =
     | ReturnType<typeof setCardsAC>
 
-
-// тип диспатча:
-type ThunkCustomDispatch = Dispatch<ActionsType>
