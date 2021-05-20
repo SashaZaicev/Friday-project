@@ -1,9 +1,11 @@
 import s from './card.module.css'
-import React from "react";
+import React, {useState} from "react";
 import {CardType} from "../../../api/api";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../app/store";
 import {deleteCardTC, updateCardTC} from "../bll/cardsReducer";
+import ModalQuestionContainer from "../../../components/Modals/ModalQuestion/ModalQuestionContainer";
+import ModalUpdateCardsContainer from "../../../components/Modals/ModalUpdateCards/ModalUpdateCardsContainer";
 
 type CardPropsType = {
     card: CardType
@@ -12,13 +14,22 @@ type CardPropsType = {
 export const Card = ({card}: CardPropsType) => {
     const dispatch = useDispatch()
     const packId = useSelector<AppRootStateType, string>(state => state.packs.packId)
+    const userId = useSelector<AppRootStateType, string>(state => state.login._id)
+
+    let [question, setQuestion] = useState<string>(card.question)
+    let [answer, setAnswer] = useState<string>(card.answer)
+    console.log(card.answer)
+    const onChangeQuestion = (value: string) => { setQuestion(value) }
+    const onChangeAnswer = (value: string) => { setAnswer(value) }
 
     const onBtnDeleteCard = () => {
         dispatch(deleteCardTC(packId, card._id))
     }
-    const onBtnUpdateCard = () => {
-        dispatch(updateCardTC(packId, card._id))
+    const onBtnUpdateCard = (question?: string, answer?: string) => {
+        dispatch(updateCardTC(packId, card._id, question, answer))
     }
+
+    const disabled = userId !== card.user_id
 
 
     return <>
@@ -28,10 +39,10 @@ export const Card = ({card}: CardPropsType) => {
             <div className={s.grade}>{card.grade}</div>
             <div className={s.updated}>{card.updated}</div>
             <div className={s.buttons}>
-                <button onClick={onBtnDeleteCard}>del
-                </button>
-                <button onClick={onBtnUpdateCard}>update
-                </button>
+                <ModalQuestionContainer modalName={"del"} onButtonModal={onBtnDeleteCard} disabled={disabled}/>
+                <ModalUpdateCardsContainer modalName={"update"} onButtonModal={onBtnUpdateCard}
+                                           question={question} answer={answer} onChange={onChangeQuestion} onChange2={onChangeAnswer} buttonTrue={"Update"} title={'Set new question'}
+                                      disabled={disabled}/>
             </div>
         </div>
     </>

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import ModalUpdate from "./ModalUpdate";
+import ModalUpdatePack from "./ModalUpdatePack";
 
 
 type ModalQuestionPropsType = {
     modalName: string
-    onButtonModal: (name: string) => void
+    onButtonModal: (value: string, value2?: string) => void
     onChange?: (name: string) => void
     value: string
     buttonTrue?: string
@@ -13,20 +13,20 @@ type ModalQuestionPropsType = {
     disabled?: boolean
 }
 
-const ModalUpdateContainer = (
+const ModalUpdatePackContainer = (
     { modalName, onButtonModal, value,
         onChange, buttonTrue, buttonFalse, title, disabled
     }: ModalQuestionPropsType) => {
 
     const [show, setShow] = useState(false);
-    const [answer, setAnswer] = useState(false);
+    const [update, setUpdate] = useState(false);
 
-    const setTrue = (name: string) => {
-        onButtonModal(name)
+    const setTrue = (value: string) => {
+        onButtonModal(value)
         setShow(false);
     };
     const setFalse = () => {
-        setAnswer(false);
+        setUpdate(false);
         setShow(false);
     };
 
@@ -36,7 +36,7 @@ const ModalUpdateContainer = (
                 <button onClick={() => setShow(true)} disabled={disabled}>{modalName}</button>
             </div>
 
-            <ModalUpdate
+            <ModalUpdatePack
                 show={show}
 
                 setTrue={setTrue}
@@ -58,4 +58,4 @@ const ModalUpdateContainer = (
     );
 };
 
-export default ModalUpdateContainer;
+export default ModalUpdatePackContainer;

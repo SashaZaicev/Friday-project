@@ -5,11 +5,10 @@ import {PackType} from "../../../../api/api";
 import s from './pack.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import ModalQuestionContainer from "../../../../components/Modals/ModalQuestion/ModalQuestionContainer";
-import ModalUpdateContainer from "../../../../components/Modals/ModalUpdate/ModalUpdateContainer";
 import {AppRootStateType} from "../../../../app/store";
 import {deletePackTC, setPackIdAC, updatePackTC} from "../../bll/packsReducer";
 import {getCardTC} from "../../../p3-cards/bll/cardsReducer";
-import {Cards} from "../../../p3-cards/ui/Cards";
+import ModalUpdatePackContainer from "../../../../components/Modals/ModalUpdatePack/ModalUpdatePackContainer";
 
 type PackPropsType = {
     pack: PackType
@@ -47,12 +46,9 @@ export const Pack = ({pack, packDate}: PackPropsType) => {
                 {/*<button onClick={onBtnDeletePack}>del</button>*/}
                 <ModalQuestionContainer modalName={"del"} onButtonModal={onBtnDeletePack} disabled={disabled}/>
                 {/*<button onClick={onBtnUpdatePack}>update</button>*/}
-                <ModalUpdateContainer modalName={"update"} onButtonModal={onBtnUpdatePack}
+                <ModalUpdatePackContainer modalName={"update"} onButtonModal={onBtnUpdatePack}
                                       value={name} onChange={onChange} buttonTrue={"Update"} title={'Set new name'}
                                       disabled={disabled}/>
-                <NavLink to={PATH.CARDS}>cards</NavLink>
-                {/*<button onClick={onBtnDeletePack}>del</button>
-                <button onClick={onBtnUpdatePack}>update</button>*/} {/*это вроде старые кнопки, на удаление*/}
                 <button onClick={onBtnCardsClick}><NavLink to={PATH.CARDS}>cards</NavLink></button>
                 <button>train</button>
             </div>

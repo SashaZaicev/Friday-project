@@ -3,7 +3,7 @@ import {LoginParamsType, loginResponseType} from "../pages/p1-login/bll/loginRed
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://neko-back.herokuapp.com/2.0/',
+    baseURL: 'http://localhost:7542/2.0/',
 })
 // baseURL: 'https://neko-back.herokuapp.com/2.0/'
 //http://localhost:7542/2.0/
@@ -65,14 +65,14 @@ export const commonAPI = {
             }
         })
     },
-    addCard(id: string) {
-        return instance.post(`cards/card`, {card: {cardsPack_id: id, question: 'My question'}})
+    addCard(id: string, question?: string, answer?: string) {
+        return instance.post(`cards/card`, {card: {cardsPack_id: id, question: question || 'My question', answer: answer}})
     },
     deleteCard(cardId: string) {
         return instance.delete(`cards/card?id=${cardId}`)
     },
-    updateCard(id: string) {
-        return instance.put(`cards/card`, {card: {_id: id, question: 'Update question'}})
+    updateCard(id: string, question?: string, answer?:string) {
+        return instance.put(`cards/card`, {card: {_id: id, question: question || 'Update question', answer: answer}})
     }
 }
 

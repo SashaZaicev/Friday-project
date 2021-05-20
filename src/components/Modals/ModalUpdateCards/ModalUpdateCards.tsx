@@ -5,37 +5,40 @@ import s from './../modal.module.css'
 
 type ModalQuestionType = {
     show: boolean;
-    value: string;
+    question: string;
+    answer: string
     title?: string;
-    onChange?: (name: string) => void;
+    onChange?: (question: string) => void;
+    onChange2?: (answer: string) => void;
 
-    setTrue: (name: string) => void;
+    setTrue: (question: string, answer: string) => void;
     setFalse: () => void;
     buttonTrue?: ReactNode;
     buttonFalse?: ReactNode;
 
     enableBackground?: boolean;
-    /*backgroundStyle?: CSSProperties;*/
     backgroundOnClick?: () => void;
 
     width: number;
     height: number;
 
-    /*modalStyle?: CSSProperties;*/
     modalOnClick?: () => void;
 }
 
-const ModalUpdate = (
+const ModalUpdateCards = (
     {
         setTrue, setFalse, title, buttonTrue, buttonFalse,
         enableBackground, backgroundOnClick = () => {},
         width, height, modalOnClick = () => {},
-        show, value, onChange,
+        show, question, answer, onChange, onChange2
     }: ModalQuestionType
 ) => {
 
-    const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(e.currentTarget.value);
+    }
+    const onChangeAnswer = (e: ChangeEvent<HTMLInputElement>) => {
+        onChange2 && onChange2(e.currentTarget.value);
     }
 
     return (
@@ -46,9 +49,12 @@ const ModalUpdate = (
         >
             {title ? title : 'question Modal'}
             <div className={s.content}>
-                <input value={value} onChange={onChangeCallback}/>
+                <div className={s.inputs}>
+                    <input value={question} onChange={onChangeQuestion}/>
+                    <input value={answer} onChange={onChangeAnswer}/>
+                </div>
                 <div className={s.buttons}>
-                    <button onClick={() => setTrue(value)}>{buttonTrue}</button>
+                    <button onClick={() => setTrue(question, answer)}>{buttonTrue}</button>
                     <button onClick={setFalse}>{buttonFalse}</button>
                 </div>
             </div>
@@ -56,4 +62,4 @@ const ModalUpdate = (
     );
 };
 
-export default ModalUpdate;
+export default ModalUpdateCards;

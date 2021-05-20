@@ -1,4 +1,3 @@
-import {Dispatch} from "redux";
 import {CardType, commonAPI} from "../../../api/api";
 import {AppRootStateType} from "../../../app/store";
 import {ThunkDispatch} from "redux-thunk";
@@ -57,8 +56,8 @@ export const getCardTC = (packId: string) => (dispatch: ThunkDispatch<AppRootSta
         })
 }
 
-export const addCardTC = (packId: string) => (dispatch: ThunkDispatch<AppRootStateType, void, ActionsType>) => {
-    commonAPI.addCard(packId)
+export const addCardTC = (packId: string, question?: string, answer?: string) => (dispatch: ThunkDispatch<AppRootStateType, void, ActionsType>) => {
+    commonAPI.addCard(packId, question, answer)
         .then(() => {
 
             dispatch(getCardTC(packId))
@@ -84,9 +83,8 @@ export const deleteCardTC = (packId: string, cardId: string) => (dispatch: Thunk
 
         })
 }
-export const updateCardTC = (packId: string, cardId: string) => (dispatch: ThunkDispatch<AppRootStateType, void, ActionsType>) => {
-    debugger
-    commonAPI.updateCard(cardId)
+export const updateCardTC = (packId: string, cardId: string, question?: string, answer?: string) => (dispatch: ThunkDispatch<AppRootStateType, void, ActionsType>) => {
+    commonAPI.updateCard(cardId, question, answer)
         .then(() => {
             dispatch(getCardTC(packId))
         })

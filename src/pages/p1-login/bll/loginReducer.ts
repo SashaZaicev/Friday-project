@@ -4,6 +4,7 @@ import {setStatusAC, setStatusActionType} from "../../p5-recoverPassword/bll/rec
 
 const initialState = {
     name: '',
+    _id: '',
     isAuth: false,
     avatar: '',
     errorText: '',
@@ -15,6 +16,8 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
             return {...state, errorText: action.text}
         case 'login/SET-NAME':
             return {...state, name: action.name}
+        case 'login/SET-USER-ID':
+            return {...state, _id: action._id}
         case 'login/SET-IS-LOGGED-IN':
             return {...state, isAuth: action.value}
         case 'login/SET-AVATAR':
@@ -29,6 +32,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
 //actions
 export const setIsLoggedInAC = (value: boolean) => ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 export const setNameAC = (name: string) => ({type: 'login/SET-NAME', name} as const)
+export const setUserIdAC = (_id: string) => ({type: 'login/SET-USER-ID', _id} as const)
 export const setAvatarAC = (avatar: string) => ({type: 'login/SET-AVATAR', avatar} as const)
 export const setErrorTextAC = (text: string) => ({type: 'login/SET_ERROR-TEXT', text} as const)
 const setAuthUserDataAC = (name: string, isAuth: boolean) => ({
@@ -42,6 +46,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
     commonAPI.login(data)
         .then((res) => {
                 dispatch(setNameAC(res.data.name))
+                dispatch(setUserIdAC(res.data._id))
                 dispatch(setAvatarAC(res.data.avatar))
                 dispatch(setIsLoggedInAC(true))
             }
@@ -116,12 +121,14 @@ export type loginResponseType = {
 export type setIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>
 export type setErrorTextACType = ReturnType<typeof setErrorTextAC>
 export type setNameACType = ReturnType<typeof setNameAC>
+export type setUserIdACType = ReturnType<typeof setUserIdAC>
 export type setAvatarACType = ReturnType<typeof setAvatarAC>
 export type setMeACType = ReturnType<typeof setAuthUserDataAC>
 type ActionsType =
     setIsLoggedInACType
     | setErrorTextACType
     | setNameACType
+    | setUserIdACType
     | setAvatarACType
     | setMeACType
     | setStatusActionType

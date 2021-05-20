@@ -14,7 +14,7 @@ import {actionsSearch} from "../../p8-tableFilter/bll/searchReducer";
 import SortModule from "../../p8-tableFilter/ui/SortModule/SortModule";
 import Preloader from "../../../components/preloader/Preloader";
 import ModalUp from "../../../components/Modals/ModalUp/ModalUp";
-import ModalUpdateContainer from "../../../components/Modals/ModalUpdate/ModalUpdateContainer";
+import ModalUpdateContainer from "../../../components/Modals/ModalUpdatePack/ModalUpdatePackContainer";
 
 export const Packs = () => {
     const dispatch = useDispatch()
