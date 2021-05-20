@@ -28,7 +28,8 @@ export const Pack = ({pack, packDate}: PackPropsType) => {
             <div className={s.tableBody_buttons}>
                 <button onClick={onBtnDeletePack}>del</button>
                 <button onClick={onBtnUpdatePack}>update</button>
-                <NavLink to={PATH.CARDS}>cards</NavLink>
+                <button><NavLink to={PATH.CARDS}>cards</NavLink></button>
+                <button>train</button>
             </div>
         </div>
     </>

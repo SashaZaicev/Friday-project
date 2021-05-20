@@ -25,7 +25,6 @@ export const Packs = () => {
     let [wait, setWait] = useState<boolean>(true)
 
     const {
-        searchName,
         page,
         pageCount,
         productTotalCount
@@ -63,7 +62,8 @@ export const Packs = () => {
 
     return (
         <>
-            <div className={s.preloader}>{ status ? <Preloader/> : "" }</div> {/*// крутилка*/}
+            <div className={s.preloader}>{status ? <Preloader/> : ""}</div>
+            {/*// крутилка*/}
             <h5>Packs page</h5>
             <SearchTable/>
             table
