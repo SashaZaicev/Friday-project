@@ -45,9 +45,9 @@ const ModalUpdate = (
             show={show}
         >
             {title ? title : 'question Modal'}
-            <div className={s.buttons}>
+            <div className={s.content}>
                 <input value={value} onChange={onChangeCallback}/>
-                <div>
+                <div className={s.buttons}>
                     <button onClick={() => setTrue(value)}>{buttonTrue}</button>
                     <button onClick={setFalse}>{buttonFalse}</button>
                 </div>

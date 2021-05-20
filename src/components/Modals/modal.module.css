@@ -22,12 +22,14 @@
 
 .buttons {
     margin-top: 10px;
-    padding: 0 50px;
     width: 100%;
     display: flex;
-    flex-flow: row;
     align-items: center;
     justify-content: space-evenly;
+}
+
+.content {
+    align-items: center;
 }
 
 .up {
