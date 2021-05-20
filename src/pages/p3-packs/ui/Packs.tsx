@@ -13,6 +13,8 @@ import Pagination from "../../p8-tableFilter/ui/Pagination/Pagination";
 import {actionsSearch} from "../../p8-tableFilter/bll/searchReducer";
 import SortModule from "../../p8-tableFilter/ui/SortModule/SortModule";
 import Preloader from "../../../components/preloader/Preloader";
+import ModalUp from "../../../components/Modals/ModalUp/ModalUp";
+import ModalUpdateContainer from "../../../components/Modals/ModalUpdate/ModalUpdateContainer";
 
 export const Packs = () => {
     const dispatch = useDispatch() // удалила useHistory
@@ -23,6 +25,7 @@ export const Packs = () => {
     const errorText = useSelector<AppRootStateType, string>(state => state.login.errorText)
     let [redirect, setRedirect] = useState<boolean>(false)
     let [wait, setWait] = useState<boolean>(true)
+    let [name, setName] = useState<string>('')
 
     const {
         searchName,
@@ -50,14 +53,15 @@ export const Packs = () => {
         return <Pack key={p._id} pack={p} packDate={date}/>
     })
 
+    const onChange = (value: string) => { setName(value) }
 
     const getPage = (newPage: number, newPageCount: number) => {
         dispatch(actionsSearch.setPageCount(newPage, newPageCount))
         dispatch(getPacksTC(newPage, newPageCount))
     };
 
-    const onBtnAddPack = () => {
-        dispatch(addPackTC())
+    const onBtnAddPack = (name: string) => {
+        dispatch(addPackTC(name))
     }
 
 
@@ -74,7 +78,10 @@ export const Packs = () => {
                     <div className={s.tableHeader_updated}>updated</div>
                     <div className={s.tableHeader_user}>User Name</div>
                     <div className={s.tableHeader_buttonAdd}>
-                        <button onClick={onBtnAddPack}>add</button>
+                        {/*<button onClick={onBtnAddPack}>add</button>*/}
+                        <ModalUpdateContainer modalName={'add'} onButtonModal={onBtnAddPack}
+                                              value={name} onChange={onChange}
+                                              title={'Enter pack name'} buttonTrue={'Enter'}/>
                     </div>
                 </div>
                 {newPacks}
@@ -83,6 +90,7 @@ export const Packs = () => {
                 }}><Pagination page={page} pageCount={pageCount} productTotalCount={productTotalCount}
                                getPage={getPage}/></div>
             </div>
+            <ModalUp speed={10}/>
         </>
     )
 }

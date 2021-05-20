@@ -19,7 +19,7 @@ export const Profile = () => {
     useEffect(() => {
         if (isAuth) return
         dispatch(getAuthUserDataTC())
-    }, [])
+    }, [isAuth, dispatch])
 
 
     if (!isAuth) return <Redirect to={PATH.LOGIN}/>

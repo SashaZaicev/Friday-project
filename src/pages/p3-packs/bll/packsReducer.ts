@@ -41,8 +41,8 @@ export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch
         })
 }
 
-export const addPackTC = () => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
-    commonAPI.addPack()
+export const addPackTC = (name?: string) => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
+    commonAPI.addPack(name)
         .then(() => {
             dispatch(getPacksTC())
         })
@@ -67,7 +67,7 @@ export const deletePackTC = (packId: string) => (dispatch: ThunkDispatch<AppRoot
         })
 }
 
-export const updatePackTC = (packId: string, name?: string) => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
+export const updatePackTC = (packId: string, name: string) => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
     commonAPI.updatePack(packId, name)
         .then(() => {
             dispatch(getPacksTC())

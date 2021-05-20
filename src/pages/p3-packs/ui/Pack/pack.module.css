@@ -1,4 +1,5 @@
 .tableBody {
+    padding: 5px 0;
     border: 1px solid lime;
     width: 100%;
     display: flex;
@@ -26,4 +27,6 @@
 
 .tableBody_buttons {
     width: 20%;
+    display: flex;
+    justify-content: space-between;
 }
