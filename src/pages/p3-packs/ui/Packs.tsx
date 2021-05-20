@@ -15,7 +15,7 @@ import SortModule from "../../p8-tableFilter/ui/SortModule/SortModule";
 import Preloader from "../../../components/preloader/Preloader";
 
 export const Packs = () => {
-    const dispatch = useDispatch() // удалила useHistory
+    const dispatch = useDispatch()
 
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
     const status = useSelector<AppRootStateType, boolean>(state => state.recoverPassword.status)

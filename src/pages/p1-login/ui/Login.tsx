@@ -13,8 +13,8 @@ import Preloader from "../../../components/preloader/Preloader";
 export const Login = () => {
     const dispatch = useDispatch()
 
-    let [email, setEmail] = useState<string>('nya-admin@nya.nya')
-    let [password, setPassword] = useState<string>('1qazxcvBG')
+    let [email, setEmail] = useState<string>('nataliaandkirik@gmail.com')
+    let [password, setPassword] = useState<string>('nataliaandkirik1817')
     let [rememberMe, setRememberMe] = useState<boolean>(false)
 
     const error = useSelector<AppRootStateType, string>(state => state.login.errorText)
@@ -28,9 +28,10 @@ export const Login = () => {
 
     return (
         <div className={s.flexMainContainer}>
-            <div className={s.preloader}>{ status ? <Preloader/> : "" }</div> {/*// крутилка*/}
+            <div className={s.preloader}>{status ? <Preloader/> : ""}</div>
+            {/*// крутилка*/}
             <h2>Login Page</h2>
-                <div className={s.answerServer}>{error && <span className={s.error}>{error}</span>}</div>
+            <div className={s.answerServer}>{error && <span className={s.error}>{error}</span>}</div>
             <div>Email</div>
             <div>
                 <SuperInputText onChangeText={(value) => {

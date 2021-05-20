@@ -3,8 +3,10 @@ import {NavLink} from "react-router-dom";
 import {PATH} from "../../../../components/routes/Routes";
 import {PackType} from "../../../../api/api";
 import s from './pack.module.css'
-import {deletePackTC, updatePackTC} from "../../bll/packsReducer";
+import {deletePackTC, setPackIdAC, updatePackTC} from "../../bll/packsReducer";
 import {useDispatch} from "react-redux";
+import {getCardTC} from "../../../p3-cards/bll/cardsReducer";
+import {Cards} from "../../../p3-cards/ui/Cards";
 
 type PackPropsType = {
     pack: PackType
@@ -19,6 +21,11 @@ export const Pack = ({pack, packDate}: PackPropsType) => {
     const onBtnUpdatePack = () => {
         dispatch(updatePackTC(pack._id))
     }
+    const onBtnCardsClick = () => {
+        dispatch(getCardTC(pack._id))
+        dispatch(setPackIdAC(pack._id))
+    }
+
     return <>
         <div className={s.tableBody}>
             <div className={s.tableBody_name}>{pack.name}</div>
@@ -28,7 +35,7 @@ export const Pack = ({pack, packDate}: PackPropsType) => {
             <div className={s.tableBody_buttons}>
                 <button onClick={onBtnDeletePack}>del</button>
                 <button onClick={onBtnUpdatePack}>update</button>
-                <button><NavLink to={PATH.CARDS}>cards</NavLink></button>
+                <button onClick={onBtnCardsClick}><NavLink to={PATH.CARDS}>cards</NavLink></button>
                 <button>train</button>
             </div>
         </div>

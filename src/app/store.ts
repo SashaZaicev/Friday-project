@@ -7,6 +7,7 @@ import {recoverPasswordReducer} from "../pages/p5-recoverPassword/bll/recoverPas
 import {newPasswordReducer} from "../pages/p6-newPassword/bll/newPasswordReducer";
 import {searchReducer} from "../pages/p8-tableFilter/bll/searchReducer";
 import {packsReducer} from "../pages/p3-packs/bll/packsReducer";
+import {cardsReducer} from "../pages/p3-cards/bll/cardsReducer";
 
 
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     recoverPassword: recoverPasswordReducer,
     newPassword: newPasswordReducer,
     search: searchReducer,
-    packs: packsReducer
+    packs: packsReducer,
+    cards: cardsReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

@@ -52,7 +52,7 @@ export const commonAPI = {
 
     //cards
 
-    getCards(packId: string, question: string, answer: string, min: string, max: string, page: number, pageCount: number) {
+    getCards(packId: string, question?: string, answer?: string, min?: string, max?: string, page?: number, pageCount?: number) {
         return instance.get<GetCardsResponseType>(`cards/card`, {
             params: {
                 cardsPack_id: packId,
@@ -65,12 +65,8 @@ export const commonAPI = {
             }
         })
     },
-    addCard(packId: string, question: string, answer: string, grade: number, shots: number, rating: number) {
-        return instance.post(`cards/card`, {
-            card: {
-                cardsPack_id: packId, question, answer, grade, shots, rating
-            }
-        })
+    addCard(id: string) {
+        return instance.post(`cards/card`, {card: {cardsPack_id: id, question: 'My question'}})
     },
     deleteCard(cardId: string) {
         return instance.delete(`cards/card?id=${cardId}`)
@@ -78,7 +74,7 @@ export const commonAPI = {
     updateCard(cardId: string, question: string, answer: string, grade: number, shots: number, rating: number, comments: string) {
         return instance.put(`cards/card`, {
             card: {
-                _id: cardId, question, answer, grade, shots,
+                _id: cardId, question: 'My question update', answer, grade, shots,
                 rating, comments
             }
         })
