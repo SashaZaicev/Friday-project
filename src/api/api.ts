@@ -71,16 +71,8 @@ export const commonAPI = {
     deleteCard(cardId: string) {
         return instance.delete(`cards/card?id=${cardId}`)
     },
-    updateCard(cardId: string, question: string, answer: string, grade: number, shots: number, rating: number, comments: string) {
-        return instance.put(`cards/card`, {
-            card: {
-                _id: cardId, question: 'My question update', answer, grade, shots,
-                rating, comments
-            }
-        })
-    },
-    updateGrade(grade: number, card_id: string) {
-        return instance.put(`cards/grade`, {grade, card_id})
+    updateCard(id: string) {
+        return instance.put(`cards/card`, {card: {_id: id, question: 'Update question'}})
     }
 }
 
