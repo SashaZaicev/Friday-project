@@ -73,6 +73,9 @@ export const commonAPI = {
     },
     updateCard(id: string, question?: string, answer?: string) {
         return instance.put(`cards/card`, {card: {_id: id, question: question, answer: answer}})
+    },
+    updateGrade(grade: number, cardId: string) {
+        return instance.put<updateGradeResponseType>(`cards/grade`, {grade, card_id: cardId})
     }
 }
 
@@ -138,4 +141,12 @@ export type CardType = {
     created: string
     updated: string
     comments: string
+}
+type updateGradeResponseType = {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
 }

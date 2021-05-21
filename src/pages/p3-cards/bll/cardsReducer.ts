@@ -9,10 +9,6 @@ const initialState = {
     cardsTotalCount: 0,
     page: 1,
     pageCount: 10,
-    question: '',
-    answer: '',
-    minGrade: 0,
-    maxGrade: 5,
     error: ''
 }
 
@@ -22,11 +18,16 @@ export const cardsReducer = (state: initialStateType = initialState, action: Act
             return {
                 ...state,
                 cards: action.cards,
-                // packId:
                 packUserId: action.packUserId,
                 page: action.page,
                 cardsTotalCount: action.cardsTotalCount,
                 pageCount: action.pageCount
+            }
+        }
+        case 'CARDS/SET-CARDS_GRADE': {
+            return {
+                ...state,
+                cards: state.cards.map(c => c._id === action.cardId ? {...c, grade: action.grade} : c)
             }
         }
         default:
@@ -36,8 +37,15 @@ export const cardsReducer = (state: initialStateType = initialState, action: Act
 
 //action creators
 
-export const setCardsAC = (cards: Array<CardType>, packUserId: string, page: number, cardsTotalCount: number, pageCount: number) =>
+export const setCardsAC = (cards: Array<CardType>, packUserId: string,
+                           page: number, cardsTotalCount: number, pageCount: number) =>
     ({type: 'CARDS/SET-CARDS', cards, packUserId, page, cardsTotalCount, pageCount} as const)
+
+export const setCardsGradeAC = (grade: number, cardId: string) => ({
+    type: 'CARDS/SET-CARDS_GRADE',
+    grade,
+    cardId
+} as const)
 
 
 //thunk
@@ -70,6 +78,7 @@ export const addCardTC = (packId: string, question?: string, answer?: string) =>
             console.log(error);
         })
 }
+
 export const deleteCardTC = (packId: string, cardId: string) => (dispatch: ThunkDispatch<AppRootStateType, void, ActionsType>) => {
     commonAPI.deleteCard(cardId)
         .then(() => {
@@ -83,10 +92,25 @@ export const deleteCardTC = (packId: string, cardId: string) => (dispatch: Thunk
 
         })
 }
+
 export const updateCardTC = (packId: string, cardId: string, question?: string, answer?: string) => (dispatch: ThunkDispatch<AppRootStateType, void, ActionsType>) => {
     commonAPI.updateCard(cardId, question, answer)
         .then(() => {
             dispatch(getCardTC(packId))
+        })
+        .catch(e => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            console.log(error);
+
+        })
+}
+
+export const updateGradeCardTC = (cardId: string, grade: number, packId: string) => (dispatch: ThunkDispatch<AppRootStateType, void, ActionsType>) => {
+    commonAPI.updateGrade(grade, cardId)
+        .then(({data}) => {
+            dispatch(setCardsGradeAC(data.grade, data.card_id))
         })
         .catch(e => {
             const error = e.response
@@ -102,4 +126,5 @@ export const updateCardTC = (packId: string, cardId: string, question?: string, 
 export type initialStateType = typeof initialState
 export type ActionsType =
     | ReturnType<typeof setCardsAC>
+    | ReturnType<typeof setCardsGradeAC>
 
