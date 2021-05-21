@@ -7,7 +7,6 @@ import {useDispatch, useSelector} from "react-redux";
 import ModalQuestionContainer from "../../../../components/Modals/ModalQuestion/ModalQuestionContainer";
 import {AppRootStateType} from "../../../../app/store";
 import {deletePackTC, setPackIdAC, updatePackTC} from "../../bll/packsReducer";
-import {getCardTC} from "../../../p3-cards/bll/cardsReducer";
 import ModalUpdatePackContainer from "../../../../components/Modals/ModalUpdatePack/ModalUpdatePackContainer";
 
 type PackPropsType = {
@@ -20,7 +19,9 @@ export const Pack = ({pack, packDate}: PackPropsType) => {
     const userName = useSelector<AppRootStateType, string>(state => state.login.name)
 
     let [name, setName] = useState<string>(pack.name)
-    const onChange = (value: string) => { setName(value) }
+    const onChange = (value: string) => {
+        setName(value)
+    }
 
     const onBtnDeletePack = () => {
         dispatch(deletePackTC(pack._id))
@@ -32,7 +33,6 @@ export const Pack = ({pack, packDate}: PackPropsType) => {
     const disabled = userName !== pack.user_name
 
     const onBtnCardsClick = () => {
-        dispatch(getCardTC(pack._id))
         dispatch(setPackIdAC(pack._id))
     }
 
@@ -43,14 +43,12 @@ export const Pack = ({pack, packDate}: PackPropsType) => {
             <div className={s.tableBody_updated}>{packDate}</div>
             <div className={s.tableBody_user}>{pack.user_name}</div>
             <div className={s.tableBody_buttons}>
-                {/*<button onClick={onBtnDeletePack}>del</button>*/}
                 <ModalQuestionContainer modalName={"del"} onButtonModal={onBtnDeletePack} disabled={disabled}/>
-                {/*<button onClick={onBtnUpdatePack}>update</button>*/}
                 <ModalUpdatePackContainer modalName={"update"} onButtonModal={onBtnUpdatePack}
-                                      value={name} onChange={onChange} buttonTrue={"Update"} title={'Set new name'}
-                                      disabled={disabled}/>
+                                          value={name} onChange={onChange} buttonTrue={"Update"} title={'Set new name'}
+                                          disabled={disabled}/>
                 <button onClick={onBtnCardsClick}><NavLink to={PATH.CARDS}>cards</NavLink></button>
-                <button>train</button>
+                <button><NavLink to={`${PATH.TRAIN}/${pack._id}`}>train</NavLink></button>
             </div>
         </div>
     </>

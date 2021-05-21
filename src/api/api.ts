@@ -66,13 +66,13 @@ export const commonAPI = {
         })
     },
     addCard(id: string, question?: string, answer?: string) {
-        return instance.post(`cards/card`, {card: {cardsPack_id: id, question: question || 'My question', answer: answer}})
+        return instance.post(`cards/card`, {card: {cardsPack_id: id, question: question, answer: answer}})
     },
     deleteCard(cardId: string) {
         return instance.delete(`cards/card?id=${cardId}`)
     },
-    updateCard(id: string, question?: string, answer?:string) {
-        return instance.put(`cards/card`, {card: {_id: id, question: question || 'Update question', answer: answer}})
+    updateCard(id: string, question?: string, answer?: string) {
+        return instance.put(`cards/card`, {card: {_id: id, question: question, answer: answer}})
     }
 }
 
@@ -135,7 +135,7 @@ export type CardType = {
     shots: number
     type: string
     user_id: string
-    created: Date
-    updated: Date
+    created: string
+    updated: string
     comments: string
 }

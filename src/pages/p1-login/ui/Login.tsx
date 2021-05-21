@@ -29,7 +29,6 @@ export const Login = () => {
     return (
         <div className={s.flexMainContainer}>
             <div className={s.preloader}>{status ? <Preloader/> : ""}</div>
-            {/*// крутилка*/}
             <h2>Login Page</h2>
             <div className={s.answerServer}>{error && <span className={s.error}>{error}</span>}</div>
             <div>Email</div>

@@ -18,9 +18,12 @@ export const Card = ({card}: CardPropsType) => {
 
     let [question, setQuestion] = useState<string>(card.question)
     let [answer, setAnswer] = useState<string>(card.answer)
-    console.log(card.answer)
-    const onChangeQuestion = (value: string) => { setQuestion(value) }
-    const onChangeAnswer = (value: string) => { setAnswer(value) }
+    const onChangeQuestion = (value: string) => {
+        setQuestion(value)
+    }
+    const onChangeAnswer = (value: string) => {
+        setAnswer(value)
+    }
 
     const onBtnDeleteCard = () => {
         dispatch(deleteCardTC(packId, card._id))
@@ -41,8 +44,9 @@ export const Card = ({card}: CardPropsType) => {
             <div className={s.buttons}>
                 <ModalQuestionContainer modalName={"del"} onButtonModal={onBtnDeleteCard} disabled={disabled}/>
                 <ModalUpdateCardsContainer modalName={"update"} onButtonModal={onBtnUpdateCard}
-                                           question={question} answer={answer} onChange={onChangeQuestion} onChange2={onChangeAnswer} buttonTrue={"Update"} title={'Set new question'}
-                                      disabled={disabled}/>
+                                           question={question} answer={answer} onChange={onChangeQuestion}
+                                           onChange2={onChangeAnswer} buttonTrue={"Update"} title={'Set new question'}
+                                           disabled={disabled}/>
             </div>
         </div>
     </>

@@ -52,7 +52,9 @@ export const Packs = () => {
         return <Pack key={p._id} pack={p} packDate={date}/>
     })
 
-    const onChange = (value: string) => { setName(value) }
+    const onChange = (value: string) => {
+        setName(value)
+    }
 
     const getPage = (newPage: number, newPageCount: number) => {
         dispatch(actionsSearch.setPageCount(newPage, newPageCount))
@@ -78,7 +80,6 @@ export const Packs = () => {
                     <div className={s.tableHeader_updated}>updated</div>
                     <div className={s.tableHeader_user}>User Name</div>
                     <div className={s.tableHeader_buttonAdd}>
-                        {/*<button onClick={onBtnAddPack}>add</button>*/}
                         <ModalUpdateContainer modalName={'add'} onButtonModal={onBtnAddPack}
                                               value={name} onChange={onChange}
                                               title={'Enter pack name'} buttonTrue={'Enter'}/>
