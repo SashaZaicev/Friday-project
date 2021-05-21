@@ -1,5 +1,4 @@
 import React, {CSSProperties, ReactNode} from 'react';
-import {isNumber} from "util";
 
 interface IPaginationProps {
     page: number;

@@ -7,13 +7,15 @@ import {setStatusAC, setStatusActionType} from "../../p5-recoverPassword/bll/rec
 
 export const initialState = {
     cardPacks: [] as Array<PackType>,
-//    isSuccess: true
+    packId: ''
 }
 
 export const packsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case'packs/SET-PACKS':
             return {...state, cardPacks: action.packs}
+        case'packs/SET-PACKID':
+            return {...state, packId: action.id}
 
         default:
             return state
@@ -22,7 +24,8 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
 
 //AC
 export const setPacksAC = (packs: Array<PackType>) => ({type: 'packs/SET-PACKS', packs} as const)
-type GetStore = () => AppRootStateType
+export const setPackIdAC = (id: string) => ({type: 'packs/SET-PACKID', id} as const)
+export type GetStore = () => AppRootStateType
 
 //thunk
 export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch: Dispatch, getStore: GetStore) => {
@@ -41,8 +44,8 @@ export const getPacksTC = (newPage?: number, newPageCount?: number) => (dispatch
         })
 }
 
-export const addPackTC = () => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
-    commonAPI.addPack()
+export const addPackTC = (name?: string) => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
+    commonAPI.addPack(name)
         .then(() => {
             dispatch(getPacksTC())
         })
@@ -67,7 +70,7 @@ export const deletePackTC = (packId: string) => (dispatch: ThunkDispatch<AppRoot
         })
 }
 
-export const updatePackTC = (packId: string, name?: string) => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
+export const updatePackTC = (packId: string, name: string) => (dispatch: ThunkDispatch<AppRootStateType, void, setPacksACType>) => {
     commonAPI.updatePack(packId, name)
         .then(() => {
             dispatch(getPacksTC())
@@ -84,6 +87,7 @@ export const updatePackTC = (packId: string, name?: string) => (dispatch: ThunkD
 
 //types
 type InitialStateType = typeof initialState
-type ActionsTypes = setPacksACType | setStatusActionType
+type ActionsTypes = setPacksACType | setStatusActionType | setPackIdACType
 type setPacksACType = ReturnType<typeof setPacksAC>
+type setPackIdACType = ReturnType<typeof setPackIdAC>
 

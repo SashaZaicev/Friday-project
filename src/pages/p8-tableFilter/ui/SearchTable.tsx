@@ -1,17 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './search.module.css'
-import {actionsSearch, getSearch} from "../bll/searchReducer";
+import {actionsSearch} from "../bll/searchReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../app/store";
 import MultiRangeSlider from "./MultiRangeSlider/MultiRangeSlider";
-import Pagination from "./Pagination/Pagination";
 import {getPacksTC} from "../../p3-packs/bll/packsReducer";
 
 
 const SearchTable = () => {
     const dispatch = useDispatch()
     const {tableProducts} = useSelector((state: AppRootStateType) => state.search)
-    const {page, pageCount, productTotalCount} = tableProducts.settingsSearch
     const tableSearch = (searchName: string) => {
         dispatch(actionsSearch.setSearchName(searchName))
     }

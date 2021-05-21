@@ -27,12 +27,6 @@ export const Header = () => {
             <div className={s.item}>
                 <NavLink to={PATH.CARDS}>cards</NavLink>
             </div>
-            {/*<div className={s.item}>*/}
-            {/*    <NavLink to={PATH.SEARCH_TABLE}>search table</NavLink>*/}
-            {/*</div>*/}
-            {/*<div className="item">*/}
-            {/*    <NavLink to={PATH.TEST_COMPONENT}>Test</NavLink>*/}
-            {/*</div>*/}
         </div>
     )
 }
