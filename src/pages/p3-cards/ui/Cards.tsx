@@ -9,7 +9,6 @@ import {Card} from "../card/Card";
 import {CardType} from "../../../api/api";
 import {addCardTC, getCardTC} from "../bll/cardsReducer";
 import ModalUpdateCardsContainer from "../../../components/Modals/ModalUpdateCards/ModalUpdateCardsContainer";
-import {getPacksTC} from "../../p3-packs/bll/packsReducer";
 import {getAuthUserDataTC} from "../../p1-login/bll/loginReducer";
 import {PATH} from "../../../components/routes/Routes";
 import {Redirect} from "react-router-dom";

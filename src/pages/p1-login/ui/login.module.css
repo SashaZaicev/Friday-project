@@ -1,8 +1,19 @@
-.flexMainContainer {
+.loginMainContainer {
+
+    border: #161615 2px solid;
+    height: 82vh;
+    background: #706e70;
+}
+
+.loginForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: #161615 2px solid;
+    width: 50vh;
+    margin: 0 auto;
+    background: #c8aac8;
 }
 
 .forgot {
@@ -19,7 +30,8 @@
 }
 
 .preloader {
-    height: 100px
+    /*height: 50px;*/
+    /*width: 50px;*/
 }
 
 .answerServer {

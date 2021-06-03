@@ -32,7 +32,7 @@ export const Card = ({card}: CardPropsType) => {
         dispatch(updateCardTC(packId, card._id, question, answer))
     }
 
-    const disabled = userId !== card.user_id
+    // const disabled = userId !== card.user_id
 
 
     return <>
@@ -42,11 +42,11 @@ export const Card = ({card}: CardPropsType) => {
             <div className={s.grade}>{card.grade}</div>
             <div className={s.updated}>{card.updated}</div>
             <div className={s.buttons}>
-                <ModalQuestionContainer modalName={"del"} onButtonModal={onBtnDeleteCard} disabled={disabled}/>
+                <ModalQuestionContainer modalName={"del"} onButtonModal={onBtnDeleteCard} disabled={false}/>
                 <ModalUpdateCardsContainer modalName={"update"} onButtonModal={onBtnUpdateCard}
                                            question={question} answer={answer} onChange={onChangeQuestion}
                                            onChange2={onChangeAnswer} buttonTrue={"Update"} title={'Set new question'}
-                                           disabled={disabled}/>
+                                           disabled={false}/>
             </div>
         </div>
     </>
