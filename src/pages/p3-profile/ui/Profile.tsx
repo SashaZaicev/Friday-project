@@ -13,7 +13,7 @@ export const Profile = () => {
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
     const avatar = useSelector<AppRootStateType, string>(state => state.login.avatar)
 
-    const localAvatart = "https://shutniki.club/wp-content/uploads/2020/01/smeshnye_avatarki_34_17105705.jpg"
+    const localAvatar = "https://shutniki.club/wp-content/uploads/2020/01/smeshnye_avatarki_34_17105705.jpg"
 
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export const Profile = () => {
                 }}/>
             </div>
             <div className={s.avatar}>
-                <img src={avatar || localAvatart}
+                <img src={avatar || localAvatar}
                      alt={"avatar"}/>
             </div>
 

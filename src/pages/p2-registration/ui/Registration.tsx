@@ -37,11 +37,7 @@ export const Registration: React.FC = () => {
             dispatch(actionsRegistrations.setSuccess(false))
         }
     }
-    //test server
-    // const time = Date.now()
-    // useEffect(() => {
-    //     timePing.ping(time)
-    // })
+
     const onLoginChange = (e: React.FormEvent<HTMLInputElement>) => {
         let login = e.currentTarget.value
         setLogin(login)

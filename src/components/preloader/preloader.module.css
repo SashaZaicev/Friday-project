@@ -2,6 +2,8 @@
     height: 82vh;
     background: #706e70;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .img {

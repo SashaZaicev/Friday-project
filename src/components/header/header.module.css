@@ -29,7 +29,7 @@
 }
 
 .text:hover {
-    text-shadow: #5da95d 0 0 6px;
+    text-shadow: #7c91f8 0 0 6px;
     cursor: pointer
 }
 
@@ -84,11 +84,11 @@
 }
 
 .main_Menu a.active {
-    border-bottom: #5da95d 3px solid;
+    border-bottom: rgba(36, 64, 243, 0.76) 3px solid;
 }
 
 .main_Menu a.current, .main_Menu a:hover {
-    color: #5da95d;
+    color: rgba(130, 135, 245, 0.99);
 }
 
 .blue_Menu a.active {
