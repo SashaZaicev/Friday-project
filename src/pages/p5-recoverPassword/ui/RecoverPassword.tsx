@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {recoverPasswordTC} from "../bll/recoverPasswordReducer";
 import {AppRootStateType} from "../../../app/store";
 import Preloader from "../../../components/preloader/Preloader";
+import c from '../../../components/commonStyle/common.module.css'
 
 export const RecoverPassword = () => {
     const dispatch = useDispatch()
@@ -28,8 +29,9 @@ export const RecoverPassword = () => {
     if (status) return <Preloader/>
 
     return (
-        <div className={s.mainContainer}>
-            <div className={s.form}><h3> Enter your email </h3>
+        <div className={c.mainContainer}>
+            <div className={`${c.form} ${s.formHeight}`}>
+                <h3> Enter your email </h3>
                 <div>
                     <div className={s.answerServer}> {error && <span className={s.error}>{error}</span>}
                         {info && <span>{info}</span>} </div>

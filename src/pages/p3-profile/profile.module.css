@@ -1,24 +1,3 @@
-.mainContainer {
-    border: #161615 2px solid;
-    height: 82vh;
-    background: #706e70;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: #161615 2px solid;
-    width: 50vh;
-    margin: 0 auto;
-    background: #c8aac8;
-    height: 350px;
-}
-
 .avatar {
     height: 150px;
     width: 150px;

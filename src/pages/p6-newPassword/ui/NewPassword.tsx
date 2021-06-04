@@ -8,6 +8,7 @@ import {AppRootStateType} from "../../../app/store";
 import {PATH} from "../../../components/routes/Routes";
 import Preloader from "../../../components/preloader/Preloader";
 import s from "./newPassword.module.css"
+import c from '../../../components/commonStyle/common.module.css'
 
 
 export const NewPassword = () => {
@@ -51,8 +52,8 @@ export const NewPassword = () => {
     if (status) return <Preloader/>
 
     return (
-        <div className={s.mainContainer}>
-            <div className={s.form}>
+        <div className={c.mainContainer}>
+            <div className={c.form}>
                 <div className={s.answerServer}> {errorPassMessage} </div>
                 <div> Enter your new password</div>
                 <SuperInputText type={'password'} placeholder={'password'} value={newPassword} onChange={onChange}/>

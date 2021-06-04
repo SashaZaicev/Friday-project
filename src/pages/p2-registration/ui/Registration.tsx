@@ -11,6 +11,7 @@ import SCBox from "./SCBox/SCBox";
 import SInp from "./SInp/SInp";
 import {PATH} from "../../../components/routes/Routes";
 import Preloader from "../../../components/preloader/Preloader";
+import c from '../../../components/commonStyle/common.module.css'
 
 export const Registration: React.FC = () => {
 
@@ -66,8 +67,8 @@ export const Registration: React.FC = () => {
 
     if (stateLoading) return <Preloader/>
     return (
-        <div className={s.mainContainer}>
-            <div className={s.form}>{(stateRegistrationError || errorServer)
+        <div className={c.mainContainer}>
+            <div className={`${c.form} ${s.formWidth}`}>{(stateRegistrationError || errorServer)
                 ? <div style={{color: 'red'}}> {errorServer ? errorServer : "УПС ошибочка..."}</div>
                 : stateRegistrationIsSuccess
                     ? <div style={{color: 'lime'}}>Success!</div>

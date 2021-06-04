@@ -9,6 +9,7 @@ import {loginTC} from "../bll/loginReducer";
 import {NavLink, Redirect} from "react-router-dom";
 import {PATH} from "../../../components/routes/Routes";
 import Preloader from "../../../components/preloader/Preloader";
+import c from '../../../components/commonStyle/common.module.css'
 
 export const Login = () => {
     const dispatch = useDispatch()
@@ -24,8 +25,8 @@ export const Login = () => {
     if (isLoggedIn) return <Redirect to={PATH.PROFILE}/>
     if (status) return <div className={s.preloader}><Preloader/></div>
     return (
-        <div className={s.loginMainContainer}>
-            <div className={s.loginForm}>
+        <div className={c.mainContainer}>
+            <div className={c.form}>
                 <div className={s.answerServer}>{error && <span className={s.error}>{error}</span>}</div>
                 <div>Email</div>
                 <div>

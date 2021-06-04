@@ -7,6 +7,7 @@ import {getAuthUserDataTC, logOutTC} from "../../p1-login/bll/loginReducer";
 import {PATH} from "../../../components/routes/Routes";
 import s from "./../profile.module.css"
 import img from "../../../components/img/user-1.png"
+import c from '../../../components/commonStyle/common.module.css'
 
 export const Profile = () => {
     const dispatch = useDispatch()
@@ -24,8 +25,8 @@ export const Profile = () => {
     if (!isAuth) return <Redirect to={PATH.LOGIN}/>
 
     return (
-        <div className={s.mainContainer}>
-            <div className={s.form}>
+        <div className={c.mainContainer}>
+            <div className={c.form}>
                 <div>
                     <img src={avatar || img}
                          alt={"avatar"}
