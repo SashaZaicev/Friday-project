@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
 
 .headerWrapper {
-    background: #67c8f5;
-    /*background-image: url("https://images.pexels.com/photos/3117228/pexels-photo-3117228.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");*/
+    background-image: url("https://images.pexels.com/photos/172289/pexels-photo-172289.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     height: 18vh;
 }
 
@@ -80,11 +79,12 @@
 }
 
 .main_Menu a {
-    color: #706e70;
+    color: #484548;
+    font-weight: bold;
 }
 
 .main_Menu a.active {
-    border-bottom: rgba(36, 64, 243, 0.76) 3px solid;
+    border-bottom: rgba(7, 38, 245, 0.76) 3px solid;
 }
 
 .main_Menu a.current, .main_Menu a:hover {
