@@ -21,6 +21,7 @@ export const TrainPage = () => {
         answer: 'Answer',
         cardsPack_id: 'cardsPack_id',
         grade: 0,
+        more_id: '',
         rating: 0,
         shots: 0,
         type: '',

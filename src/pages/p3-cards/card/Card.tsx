@@ -13,9 +13,8 @@ type CardPropsType = {
 
 export const Card = ({card}: CardPropsType) => {
     const dispatch = useDispatch()
-    const packId = useSelector<AppRootStateType, string>(state => state.packs.packId)
     const userId = useSelector<AppRootStateType, string>(state => state.login._id)
-
+    const packId = useSelector<AppRootStateType, string>(state => state.packs.packId)
     let [question, setQuestion] = useState<string>(card.question)
     let [answer, setAnswer] = useState<string>(card.answer)
     const onChangeQuestion = (value: string) => {
@@ -32,7 +31,8 @@ export const Card = ({card}: CardPropsType) => {
         dispatch(updateCardTC(packId, card._id, question, answer))
     }
 
-    // const disabled = userId !== card.user_id
+    const disabled = card.more_id !== userId
+    debugger
 
 
     return <>
@@ -42,11 +42,12 @@ export const Card = ({card}: CardPropsType) => {
             <div className={s.grade}>{card.grade}</div>
             <div className={s.updated}>{card.updated}</div>
             <div className={s.buttons}>
-                <ModalQuestionContainer modalName={"del"} onButtonModal={onBtnDeleteCard} disabled={false}/>
+                <ModalQuestionContainer modalName={"del"} onButtonModal={onBtnDeleteCard}
+                                        disabled={disabled}/>
                 <ModalUpdateCardsContainer modalName={"update"} onButtonModal={onBtnUpdateCard}
                                            question={question} answer={answer} onChange={onChangeQuestion}
                                            onChange2={onChangeAnswer} buttonTrue={"Update"} title={'Set new question'}
-                                           disabled={false}/>
+                                           disabled={disabled}/>
             </div>
         </div>
     </>

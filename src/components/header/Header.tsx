@@ -27,9 +27,6 @@ export const Header = () => {
                 <li className={s.active}>
                     <NavLink to={PATH.PACKS} activeClassName={s.active}>packs</NavLink>
                 </li>
-                <li className={s.active}>
-                    <NavLink to={PATH.CARDS} activeClassName={s.active}>cards</NavLink>
-                </li>
             </ul>)}
 
 
