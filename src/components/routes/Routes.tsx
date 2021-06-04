@@ -40,7 +40,6 @@ export const Routes = () => {
                 <Route exact path={`${PATH.CARDS}/:packId?`} render={() => <Cards/>}/>
                 <Route exact path={PATH.SEARCH_TABLE} render={() => <SearchTable/>}/>
                 <Route exact path={`${PATH.TRAIN}/:packId?`} render={() => <TrainPage/>}/>
-                {/*<Route exact path={PATH.TEST_COMPONENT} render={() => <Test/>}/>*/}
                 <Route path={PATH.ERROR_404} render={() => <Error404/>}/>
                 <Redirect from={'*'} to={PATH.ERROR_404}/>
             </Switch>

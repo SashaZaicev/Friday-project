@@ -26,17 +26,13 @@
 }
 
 .error {
-    padding: 3px;
+    padding: 5px;
     font-size: 15px;
     letter-spacing: 1px;
     color: red;
 }
 
-.preloader {
-    /*height: 50px;*/
-    /*width: 50px;*/
-}
-
 .answerServer {
+    margin: 5px;
     height: 20px
 }

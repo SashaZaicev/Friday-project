@@ -1,54 +1,26 @@
-.checkInBlock {
+.mainContainer {
+    border: #161615 2px solid;
+    height: 82vh;
+    background: #706e70;
     display: flex;
-    flex-wrap: wrap;
-    align-content: center;
     justify-content: center;
-    flex-direction: column;
+    align-items: center;
 }
 
-.checkInTitle {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.checkInBtn {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.checkInBlock a:visited {
-    color: black;
-}
-
-.checkInBlock a {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.checkInBlock label {
+.form {
     display: flex;
     flex-direction: column;
-    font-weight: bold;
-
-}
-
-.checkInBlock label input {
-    padding-left: 5px;
-    margin-bottom: 0;
+    justify-content: space-between;
+    align-items: center;
+    border: #161615 2px solid;
+    width: 50vh;
+    margin: 0 auto;
+    background: #c8aac8;
+    height: 380px;
 }
 
 .help {
     display: flex;
-    font-size: x-small;
-    color: #757575;
-}
-
-.preloader {
-    height: 100px
+    font-size: small;
+    color: #454444;
 }

@@ -6,14 +6,13 @@ import SuperButton from "../../../components/SuperComponents/SuperButton/SuperBu
 import {getAuthUserDataTC, logOutTC} from "../../p1-login/bll/loginReducer";
 import {PATH} from "../../../components/routes/Routes";
 import s from "./../profile.module.css"
+import img from "../../../components/img/user-1.png"
 
 export const Profile = () => {
     const dispatch = useDispatch()
     const name = useSelector<AppRootStateType, string>(state => state.login.name)
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
     const avatar = useSelector<AppRootStateType, string>(state => state.login.avatar)
-
-    const localAvatar = "https://shutniki.club/wp-content/uploads/2020/01/smeshnye_avatarki_34_17105705.jpg"
 
 
     useEffect(() => {
@@ -25,17 +24,21 @@ export const Profile = () => {
     if (!isAuth) return <Redirect to={PATH.LOGIN}/>
 
     return (
-        <div className={s.flexMainContainer}>
-            Profile user {name}
-            <div>
-                <SuperButton name={'log out'} onClick={() => {
-                    dispatch(logOutTC())
-                }}/>
+        <div className={s.mainContainer}>
+            <div className={s.form}>
+                <div>
+                    <img src={avatar || img}
+                         alt={"avatar"}
+                         className={s.avatar}/>
+                </div>
+                Profile user {name}
+                <div>
+                    <SuperButton name={'log out'} onClick={() => {
+                        dispatch(logOutTC())
+                    }}/>
+                </div>
             </div>
-            <div className={s.avatar}>
-                <img src={avatar || localAvatar}
-                     alt={"avatar"}/>
-            </div>
+
 
         </div>
     )
