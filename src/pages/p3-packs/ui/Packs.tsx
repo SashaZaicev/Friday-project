@@ -65,14 +65,10 @@ export const Packs = () => {
         dispatch(addPackTC(name))
     }
 
-
+    if (status) return <Preloader/>
     return (
         <>
-            <div className={s.preloader}>{status ? <Preloader/> : ""}</div>
-            {/*// крутилка*/}
-            <h5>Packs page</h5>
             <SearchTable/>
-            table
             <div className={s.table}>
                 <div className={s.tableHeader}>
                     <div className={s.tableHeader_packsName}>Name</div>

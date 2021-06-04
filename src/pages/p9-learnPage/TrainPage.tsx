@@ -6,13 +6,17 @@ import {getCardTC, updateGradeCardTC} from "../p3-cards/bll/cardsReducer";
 import {getRandomCard} from "../../components/functions/getRandomCard";
 import {PATH} from "../../components/routes/Routes";
 import {NavLink, useParams} from "react-router-dom";
+import s from './trainPage.module.css'
+import c from '../../components/commonStyle/common.module.css'
+
 
 export const TrainPage = () => {
     const grades = ['не знал', 'забыл', 'долго думал', 'перепутал', 'знал'];
     const [isChecked, setIsChecked] = useState<boolean>(false);
-    const [first, setFirst] = useState<boolean>(true);
+    const [isFirstCard, setFirstCard] = useState<boolean>(true);
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards)
     const {packId} = useParams<Record<string, string>>();
+    const dispatch = useDispatch();
 
 
     const [card, setCard] = useState<CardType>({
@@ -21,6 +25,7 @@ export const TrainPage = () => {
         answer: 'Answer',
         cardsPack_id: 'cardsPack_id',
         grade: 0,
+        more_id: '',
         rating: 0,
         shots: 0,
         type: '',
@@ -30,48 +35,51 @@ export const TrainPage = () => {
         comments: 'comments'
     });
 
-    const dispatch = useDispatch();
     useEffect(() => {
-        if (first) {
+        if (isFirstCard) {
             dispatch(getCardTC(packId));
-            setFirst(false);
+            setFirstCard(false);
         }
-        console.log('cards', cards)
         if (cards.length > 0) setCard(getRandomCard(cards));
 
-    }, [dispatch, packId, cards, first]);
+    }, [dispatch]);
 
-    const onNext = () => {
-        dispatch(updateGradeCardTC(card._id, 5, packId))
-        setCard(getRandomCard(cards));
-        setIsChecked(false);
-    }
     const onGradeBtnClick = (grade: number) => {
         dispatch(updateGradeCardTC(card._id, grade, packId))
         setCard(getRandomCard(cards));
         setIsChecked(false)
     }
+    const onNext = () => {
+        setCard(getRandomCard(cards));
+        setIsChecked(false);
+    }
 
     return (
-        <div>
-            <h6>TrainPage</h6>
+        <div className={c.mainContainer}>
+            <div className={c.form}>
+                <div>{card.question}</div>
+                <div>
+                    <button
+                        onClick={() => setIsChecked(!isChecked)}>{isChecked ? 'hide answer' : 'show answer'}</button>
+                </div>
+                {isChecked && (<div>{card.answer}</div>)}
 
-            <div>{card.question}</div>
-            <div>
-                <button onClick={() => setIsChecked(true)}>show answer</button>
-            </div>
+                <div className={s.buttons}>{grades.map((g, i) => (
+                    <button key={'grade-' + i} className={s.button} onClick={() => {
+                        onGradeBtnClick(i + 1)
+                    }}>{g}</button>
 
-            {isChecked && (<div>{card.answer}</div>)}
+                ))}
+                </div>
 
-            {grades.map((g, i) => (
-                <button key={'grade-' + i} onClick={() => {
-                    onGradeBtnClick(i + 1)
-                }}>{g}</button>
-            ))}
-
-            <div>
-                <button><NavLink to={PATH.PACKS}>cancel</NavLink></button>
-                <button onClick={onNext}>next</button>
+                <div className={s.buttons}>
+                    <div className={s.button}>
+                        <button><NavLink to={PATH.PACKS} className={s.button1}>cancel</NavLink></button>
+                    </div>
+                    <div className={s.button}>
+                        <button onClick={onNext}>next</button>
+                    </div>
+                </div>
             </div>
         </div>
     );

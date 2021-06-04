@@ -1,0 +1,18 @@
+.mainContainer {
+    height: 82vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50vh;
+    margin: 0 auto;
+    background: rgba(250, 236, 222, 0.9);
+    height: 380px;
+    border-radius: 25px;
+}

@@ -1,0 +1,10 @@
+.buttons {
+    display: flex;
+
+}
+
+.button {
+    margin: 3px;
+}
+
+

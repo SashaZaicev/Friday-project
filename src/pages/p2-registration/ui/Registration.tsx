@@ -11,6 +11,7 @@ import SCBox from "./SCBox/SCBox";
 import SInp from "./SInp/SInp";
 import {PATH} from "../../../components/routes/Routes";
 import Preloader from "../../../components/preloader/Preloader";
+import c from '../../../components/commonStyle/common.module.css'
 
 export const Registration: React.FC = () => {
 
@@ -37,11 +38,7 @@ export const Registration: React.FC = () => {
             dispatch(actionsRegistrations.setSuccess(false))
         }
     }
-    //test server
-    // const time = Date.now()
-    // useEffect(() => {
-    //     timePing.ping(time)
-    // })
+
     const onLoginChange = (e: React.FormEvent<HTMLInputElement>) => {
         let login = e.currentTarget.value
         setLogin(login)
@@ -67,30 +64,25 @@ export const Registration: React.FC = () => {
     const errInputLogin = (login === '' && stateRegistrationError) ? 'Обязательное поле' : '';
     const errInputPas = (password === '' && stateRegistrationError) ? 'Обязательное поле' : '';
     const errInputPas2 = (password2 === '' && stateRegistrationError) ? 'Обязательное поле' : '';
+
+    if (stateLoading) return <Preloader/>
     return (
-        <div className={s.checkInBlock}>
-            <div className={s.preloader}> {stateLoading
-                ? <Preloader/>
-                : ""
-            } </div>
-            <h2 className={s.checkInTitle}>Registration</h2>
-            {(stateRegistrationError || errorServer)
+        <div className={c.mainContainer}>
+            <div className={`${c.form} ${s.formWidth}`}>{(stateRegistrationError || errorServer)
                 ? <div style={{color: 'red'}}> {errorServer ? errorServer : "УПС ошибочка..."}</div>
                 : stateRegistrationIsSuccess
                     ? <div style={{color: 'lime'}}>Success!</div>
                     : <div><br/></div>}
-            <label>Email:
-                <div className={s.help}>Example: Alex@company.com</div>
+                <div>Email</div>
                 <SInp
                     error={errInputLogin}
                     value={login}
                     onChange={onLoginChange}
                     type={'email'}
                     placeholder={'Alex@company.com'}/>
-            </label>
-            <label>Password:
-                <div className={s.help}>Example: Must be between
-                    8-20 character </div>
+
+                <div>Password</div>
+                <div className={s.help}>Must be between 8-20 character</div>
                 <SInp
                     error={errInputPas}
                     value={password}
@@ -98,10 +90,8 @@ export const Registration: React.FC = () => {
                     type={'password'}
                     placeholder={'password'}
                 />
-            </label>
-            <label>Confirm password:
-                <div className={s.help}>Example: Must be between
-                    8-20 character </div>
+                <div>Confirm password</div>
+                <div className={s.help}>Must be between 8-20 character</div>
                 <SInp
                     error={errInputPas2}
                     value={password2}
@@ -109,16 +99,18 @@ export const Registration: React.FC = () => {
                     type={'password'}
                     placeholder={'confirm password'}
                 />
-            </label>
-            <div className={s.checkInBtn}>
+
+                <div>
+                    <span>Remember me</span>
+                    <SCBox onChange={setRememberMeChange} checked={rememberMe}/>
+                </div>
                 <SBtn callFunction={addUser}
                       name={'Register'}
                       disabled={!!stateLoading}
 
                 />
-                <SCBox onChange={setRememberMeChange} checked={rememberMe}/>
-            </div>
-            <NavLink to={PATH.LOGIN}>Sign In</NavLink>
+
+                <NavLink to={PATH.LOGIN}>Sign In</NavLink></div>
         </div>
     )
 }

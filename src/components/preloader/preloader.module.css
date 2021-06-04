@@ -1,3 +1,11 @@
 .preloader {
-    height: 100px
+    height: 82vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img {
+    height: 300px;
+    margin: 0 auto;
 }

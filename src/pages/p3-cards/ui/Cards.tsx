@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import s from "../../p3-packs/ui/table.module.css";
 import Preloader from "../../../components/preloader/Preloader";
-import SearchTable from "../../p8-tableFilter/ui/SearchTable";
-import Pagination from "../../p8-tableFilter/ui/Pagination/Pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../app/store";
 import {Card} from "../card/Card";
 import {CardType} from "../../../api/api";
-import {addCardTC, getCardTC} from "../bll/cardsReducer";
+import {addCardTC, getCardTC, setCardsAC} from "../bll/cardsReducer";
 import ModalUpdateCardsContainer from "../../../components/Modals/ModalUpdateCards/ModalUpdateCardsContainer";
-import {getPacksTC} from "../../p3-packs/bll/packsReducer";
 import {getAuthUserDataTC} from "../../p1-login/bll/loginReducer";
 import {PATH} from "../../../components/routes/Routes";
 import {Redirect} from "react-router-dom";
@@ -42,10 +39,11 @@ export const Cards = () => {
     }
 
     useEffect(() => {
-        if (isAuth) {
+        if (isAuth && packId) {
             dispatch(getCardTC(packId))
-            setRedirect(false)
-            return
+            return () => {
+                dispatch(setCardsAC([], "", 1, 0, 10))
+            }
         } else {
             setRedirect(true)
         }
@@ -53,12 +51,10 @@ export const Cards = () => {
     }, [isAuth, dispatch])
 
     if (redirect) return <Redirect to={PATH.LOGIN}/>
+    if (status) return <Preloader/>
 
     return (
         <>
-            <div className={s.preloader}>{status ? <Preloader/> : ""}</div>
-            <SearchTable/>
-            table
             <div className={s.table}>
                 <div className={s.tableHeader}>
                     <div className={s.tableHeader_packsName}>question</div>
@@ -74,10 +70,6 @@ export const Cards = () => {
                 </div>
                 {newCards}
             </div>
-            <Pagination page={19} pageCount={12} productTotalCount={30}
-                        getPage={() => {
-                            'getpage'
-                        }}/>
 
         </>
     )

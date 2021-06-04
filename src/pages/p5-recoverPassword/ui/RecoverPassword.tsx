@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {recoverPasswordTC} from "../bll/recoverPasswordReducer";
 import {AppRootStateType} from "../../../app/store";
 import Preloader from "../../../components/preloader/Preloader";
+import c from '../../../components/commonStyle/common.module.css'
 
 export const RecoverPassword = () => {
     const dispatch = useDispatch()
@@ -25,21 +26,24 @@ export const RecoverPassword = () => {
         setEmail(email)
     }
 
+    if (status) return <Preloader/>
+
     return (
-        <div className={s.content}>
-            <div className={s.preloader}>{ status ? <Preloader/> : "" }</div> {/*// крутилка*/}
-            <h2> Enter your email </h2>
-            <div>
-                <div className={s.answerServer}> {error && <span className={s.error}>{error}</span>}
-                    {info && <span>{info}</span>} </div>
-                <SuperInputText type={'text'}
-                                value={email}
-                                onChange={onChange}/>
-            </div>
-            <div>
-                <SuperButton name={"Recover password"}
-                             onClick={() => recoverPassword(email, from, message)}
-                             disabled={status}/>
+        <div className={c.mainContainer}>
+            <div className={`${c.form} ${s.formHeight}`}>
+                <h3> Enter your email </h3>
+                <div>
+                    <div className={s.answerServer}> {error && <span className={s.error}>{error}</span>}
+                        {info && <span>{info}</span>} </div>
+                    <SuperInputText type={'text'}
+                                    value={email}
+                                    onChange={onChange}/>
+                </div>
+                <div>
+                    <SuperButton name={"Recover password"}
+                                 onClick={() => recoverPassword(email, from, message)}
+                                 disabled={status}/>
+                </div>
             </div>
         </div>
     )

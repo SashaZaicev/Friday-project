@@ -1,10 +1,3 @@
-.flexMainContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .forgot {
     display: flex;
     justify-content: space-around;
@@ -12,16 +5,13 @@
 }
 
 .error {
-    padding: 3px;
+    padding: 5px;
     font-size: 15px;
     letter-spacing: 1px;
     color: red;
 }
 
-.preloader {
-    height: 100px
-}
-
 .answerServer {
+    margin: 5px;
     height: 20px
 }

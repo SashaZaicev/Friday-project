@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useParams, useHistory} from 'react-router-dom';
+import {useParams, useHistory, Redirect} from 'react-router-dom';
 import SuperInputText from "../../../components/SuperComponents/SuperInput/SuperInputText";
 import SuperButton from "../../../components/SuperComponents/SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,6 +8,7 @@ import {AppRootStateType} from "../../../app/store";
 import {PATH} from "../../../components/routes/Routes";
 import Preloader from "../../../components/preloader/Preloader";
 import s from "./newPassword.module.css"
+import c from '../../../components/commonStyle/common.module.css'
 
 
 export const NewPassword = () => {
@@ -21,7 +22,7 @@ export const NewPassword = () => {
     const errorPassMessage = useSelector<AppRootStateType, string>(state => state.newPassword.errorPassMessage)
     const status = useSelector<AppRootStateType, boolean>(state => state.newPassword.status)
 
-    const redirectLogin = () => history.push(PATH.LOGIN)
+    const redirectLogin = () => <Redirect to={PATH.LOGIN}/>
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
         let newPassword = e.currentTarget.value
@@ -48,18 +49,18 @@ export const NewPassword = () => {
     }
 
     if (passwordStatus) setTimeout(redirectLogin, 2000)
-
+    if (status) return <Preloader/>
 
     return (
-        <div className={s.content}>
-            <div className={s.preloader}>{status ? <Preloader/> : ""}</div>
-            <h2> NewPassword </h2>
-            <div className={s.answerServer}> {errorPassMessage} </div>
-            <div> Enter your new password </div>
-            <SuperInputText type={'password'} placeholder={'password'} value={newPassword} onChange={onChange}/>
-            <div> Repeat your new password </div>
-            <SuperInputText type={'password'} placeholder={'password'} value={newPassword2} onChange={repeatOnChange}/>
-            <SuperButton name={'New Password'} callFunction={onChangePassword}/>
+        <div className={c.mainContainer}>
+            <div className={c.form}>
+                <div className={s.answerServer}> {errorPassMessage} </div>
+                <div> Enter your new password</div>
+                <SuperInputText type={'password'} placeholder={'password'} value={newPassword} onChange={onChange}/>
+                <div> Repeat your new password</div>
+                <SuperInputText type={'password'} placeholder={'password'} value={newPassword2}
+                                onChange={repeatOnChange}/>
+                <SuperButton name={'New Password'} callFunction={onChangePassword}/></div>
         </div>
     )
 }
