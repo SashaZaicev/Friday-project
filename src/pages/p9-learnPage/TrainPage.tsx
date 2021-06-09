@@ -11,7 +11,7 @@ import c from '../../components/commonStyle/common.module.css'
 
 
 export const TrainPage = () => {
-    const grades = ['не знал', 'забыл', 'долго думал', 'перепутал', 'знал'];
+    const grades = ["didn't know", 'forgot', 'thought too long', 'nearly guessed', 'i knew it'];
     const [isChecked, setIsChecked] = useState<boolean>(false);
     const [isFirstCard, setFirstCard] = useState<boolean>(true);
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards)
